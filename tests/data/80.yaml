@@ -1,0 +1,7 @@
+name: Deltares
+test-description: Test
+test-description-long: >
+  This is the file for testing
+date: 2025-06-23
+json-file: json_output_80.json
+STEM-version: 1.2
