@@ -15,7 +15,13 @@ def __definitions() -> Schema:
         "COORDINATES": And(list, lambda l: len(l) == 3, [Use(float)]),
         "DISPLACEMENT_X": And(list, lambda l: len(l) > 0, [Use(float)]),
         "DISPLACEMENT_Y": And(list, lambda l: len(l) > 0, [Use(float)]),
-        "DISPLACEMENT_Z": And(list, lambda l: len(l) > 0, [Use(float)])
+        "DISPLACEMENT_Z": And(list, lambda l: len(l) > 0, [Use(float)]),
+        "VELOCITY_X": And(list, lambda l: len(l) > 0, [Use(float)]),
+        "VELOCITY_Y": And(list, lambda l: len(l) > 0, [Use(float)]),
+        "VELOCITY_Z": And(list, lambda l: len(l) > 0, [Use(float)]),
+        "ACCELERATION_X": And(list, lambda l: len(l) > 0, [Use(float)]),
+        "ACCELERATION_Y": And(list, lambda l: len(l) > 0, [Use(float)]),
+        "ACCELERATION_Z": And(list, lambda l: len(l) > 0, [Use(float)]),
     })
 
     conf_schema_json = Schema({
@@ -93,8 +99,3 @@ def validate_yaml_file(yaml_path):
             raise ValueError(f"Missing required metadata field: {key}")
 
     return meta
-
-
-if __name__ == "__main__":
-    print(json_validator("tests/data/json_output_80_length.json"
-                   ))
