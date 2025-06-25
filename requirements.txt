@@ -1,3 +1,4 @@
 PyYAML==6.0.2
 schema==0.7.7
 pytest==8.4.1
+SignalProcessingTools==1.2.3

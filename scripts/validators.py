@@ -88,14 +88,31 @@ def json_validator(json_path: str) -> bool:
         return False
     return True
 
-def validate_yaml_file(yaml_path):
+
+def yaml_validator(yaml_path: str) -> bool:
+    """
+    Validates a YAML file for required metadata fields.
+
+    Parameters:
+        yaml_path (str): Path to the YAML file.
+    Returns:
+        bool: True if valid, False if required fields are missing.
+    """
 
     with open(yaml_path, 'r') as f:
         meta = yaml.safe_load(f)
 
-    required_keys = ["name", "test_description", "json_file", "date", "stem_version"]
+    required_keys = ["name", "title", "test-description","date", "json-file", "input-file", "STEM-version"]
+    # check if all required keys are present
     for key in required_keys:
         if key not in meta:
-            raise ValueError(f"Missing required metadata field: {key}")
+            print(f"Missing required metadata field: {key}")
+            return False
 
-    return meta
+    # check if all keys are not empty
+    for key, value in meta.items():
+        if not value:
+            print(f"Metadata field '{key}' is empty.")
+            return False
+
+    return True

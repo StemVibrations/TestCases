@@ -1,0 +1,7 @@
+name: Deltares
+title: Test
+test-description: >
+  This is the file for testing
+json-file: json_output_80.json
+input-file: input_80.py
+STEM-version: 1.2
