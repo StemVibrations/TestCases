@@ -113,7 +113,7 @@ def test_json_size_zero(capsys):
     assert not result
 
     # Assert that the printed message is correct
-    assert "JSON file tests/data/json_output_empty.json is empty." in captured.out
+    assert "JSON file json_output_empty.json is empty." in captured.out
 
 def test_input_size_zero(capsys):
     """
@@ -129,7 +129,7 @@ def test_input_size_zero(capsys):
     assert not result
 
     # Assert that the printed message is correct
-    assert "Input file tests/data/input_empty.py is empty." in captured.out
+    assert "Input file input_empty.py is empty." in captured.out
 
 def test_yaml_not_existing(capsys):
     """
