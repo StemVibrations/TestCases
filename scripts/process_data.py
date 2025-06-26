@@ -72,7 +72,7 @@ def edit_content_results(summary: dict):
     for key in sorted(summary.keys()):
         new_content.append(f"## {summary[key]['meta']['title']}\n\n")
         new_content.append(f"**Description:** {summary[key]['meta']['test-description']}\n")
-        new_content.append(f"**Organization:** {summary[key]['meta']['name']}\n\n")
+        new_content.append(f"**Organization:** {summary[key]['meta']['organisation']}\n\n")
         new_content.append(f"**Date:** {summary[key]['meta']['date']}\n\n")
         new_content.append(f"**STEM Version:** {summary[key]['meta']['STEM-version']}\n\n")
         new_content.append(f"![{summary[key]['meta']['title']}](/TestCases/{summary[key]['plot_location']})\n\n")

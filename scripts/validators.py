@@ -115,7 +115,7 @@ def yaml_validator(yaml_path: str) -> bool:
     with open(yaml_path, 'r') as f:
         meta = yaml.safe_load(f)
 
-    required_keys = ["name", "title", "test-description","date", "json-file", "input-file", "STEM-version"]
+    required_keys = ["organisation", "title", "test-description","date", "json-file", "input-file", "STEM-version"]
     # check if all required keys are present
     for key in required_keys:
         if key not in meta:
