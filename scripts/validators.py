@@ -108,6 +108,9 @@ def yaml_validator(yaml_path: str) -> bool:
         print(f"YAML file {yaml_path} is empty.")
         return False
 
+    # yaml directory
+    yaml_dir = os.path.dirname(yaml_path)
+
     # load yaml file
     with open(yaml_path, 'r') as f:
         meta = yaml.safe_load(f)
@@ -126,16 +129,16 @@ def yaml_validator(yaml_path: str) -> bool:
             return False
 
     # check is json-file and input files exist and size is greater than 2 bytes
-    if not os.path.isfile(meta["json-file"]):
+    if not os.path.isfile(os.path.join(yaml_dir, meta["json-file"])):
         print(f"JSON file {meta['json-file']} does not exist.")
         return False
-    if os.path.getsize(meta["json-file"]) <= 2:
+    if os.path.getsize(os.path.join(yaml_dir, meta["json-file"])) <= 2:
         print(f"JSON file {meta['json-file']} is empty.")
         return False
-    if not os.path.isfile(meta["input-file"]):
+    if not os.path.isfile(os.path.join(yaml_dir, meta["input-file"])):
         print(f"Input file {meta['input-file']} does not exist.")
         return False
-    if os.path.getsize(meta["input-file"]) <= 2:
+    if os.path.getsize(os.path.join(yaml_dir, meta["input-file"])) <= 2:
         print(f"Input file {meta['input-file']} is empty.")
         return False
 
