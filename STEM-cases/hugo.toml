@@ -1,0 +1,32 @@
+baseURL = "https://example.com/"
+languageCode = "en"
+title = "STEM test cases"
+theme = "PaperMod"
+
+disableKinds = ["taxonomy", "RSS", "sitemap", "robotsTXT", "404"]
+
+[params]
+  defaultTheme = "light"
+  ShowToc = false
+  UseHugoToc = false
+  comments = false
+
+# Menu configuration
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    name = "Home"
+    url = "/"
+    weight = 1
+
+  [[menu.main]]
+    identifier = "results"
+    name = "Results"
+    url = "/results"
+    weight = 2
+
+  [[menu.main]]
+    identifier = "summary"
+    name = "Summary"
+    url = "/summary"
+    weight = 3
