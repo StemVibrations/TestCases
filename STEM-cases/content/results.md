@@ -3,7 +3,7 @@ title: "Results"
 url: "/results"
 ---
 
-## Results
+# Results
 
 This page shows generated plots from data.
 

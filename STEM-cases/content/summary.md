@@ -3,7 +3,7 @@ title: "Summary"
 url: "/summary"
 ---
 
-## Results
+# Results
 
 This page shows generated plots from data.
 
