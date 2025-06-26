@@ -1,0 +1,33 @@
+name: Tests
+
+# Controls when the workflow will run
+on:
+  pull_request:
+    branches: [ "**" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install libGLU library on Ubuntu
+      run: sudo apt-get install -y libglu1-mesa
+      shell: bash
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+
+    - name: Install Python dependencies
+      run: pip install -r requirements.txt
+
+    - name: Test backend
+      run: pytest tests

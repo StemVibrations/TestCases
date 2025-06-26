@@ -1,0 +1,8 @@
+name: Deltares
+title: Test
+test-description: >
+  This is the file for testing
+date: 2025-06-23
+json-file: tests/data/json_output_empty.json
+input-file: input.py
+STEM-version: 1.2
