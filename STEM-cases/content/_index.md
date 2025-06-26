@@ -14,4 +14,4 @@ In [summary]({{< ref "summary.md" >}}) you can find a summary of the test cases.
 
 ## STEM Overview
 
-![STEM Overview](STEM_overview.png)
+![STEM Overview](/TestCases/STEM_overview.png)
