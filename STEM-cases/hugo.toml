@@ -1,4 +1,4 @@
-baseURL = "stemvibrations.github.io"
+baseURL = "https://stemvibrations.github.io"
 languageCode = "en"
 title = "STEM test cases"
 theme = "PaperMod"
