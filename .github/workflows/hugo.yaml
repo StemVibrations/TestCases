@@ -70,7 +70,20 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: processed-data
-          path: ./
+          path: ./processed-data
+      - name: Copy processed data to workspace
+        run: |
+          mkdir -p ./STEM-cases/static
+          cp -r ./processed-data/STEM-cases/content/* ./STEM-cases/content/ || true
+          cp -r ./processed-data/STEM-cases/static/* ./STEM-cases/static/ || true
+      - name: Verify processed files
+        run: |
+          echo "Content of results.md:"
+          head -20 ./STEM-cases/content/results.md
+          echo "Content of summary.md:"
+          head -20 ./STEM-cases/content/summary.md
+          echo "Files in static directory:"
+          ls -la ./STEM-cases/static/
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
