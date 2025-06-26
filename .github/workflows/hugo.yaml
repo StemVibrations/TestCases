@@ -33,9 +33,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       HUGO_VERSION: 0.128.0
-    defaults:
-      run:
-        working-directory: ./STEM-cases
     steps:
       - name: Install Hugo CLI
         run: |
@@ -60,6 +57,7 @@ jobs:
           hugo \
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
+        working-directory: ./STEM-cases
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
