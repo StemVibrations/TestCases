@@ -185,7 +185,7 @@ def process_plot_data(data: dict, meta: dict) -> dict:
                "peak_v_eff": np.max(signal.v_eff),
                "peak_fft": np.max(signal.amplitude)*1000,
                "freq_peak_fft": signal.frequency[np.argmax(signal.amplitude)],
-               "plot_location": f"/{name}.png",
+               "plot_location": f"/STEM-cases/{name}.png",
                "meta": meta}
     return summary
 
