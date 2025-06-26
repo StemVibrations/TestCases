@@ -12,6 +12,8 @@ In [results]({{< ref "results.md" >}}) you can find the results of the test case
 In [summary]({{< ref "summary.md" >}}) you can find a summary of the test cases.
 
 
-## STEM Overview
+## STEM links
 
-![STEM Overview](/TestCases/STEM_overview.png)
+[STEM installation](https://stemvibrations.readthedocs.io/v1.2/#stem-installation)
+
+[STEM code](https://github.com/StemVibrations/STEM)
