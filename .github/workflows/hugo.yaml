@@ -47,6 +47,7 @@ jobs:
           name: processed-data
           path: |
             STEM-cases/static/
+            STEM-cases/content/
 
   # Build job
   build:
