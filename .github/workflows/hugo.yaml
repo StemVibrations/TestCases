@@ -70,6 +70,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: processed-data
+          path: ./
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
