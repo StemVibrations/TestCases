@@ -3,6 +3,6 @@ title: Test
 test-description: >
   This is the file for testing
 date: 2025-06-23
-json-file: tests/data/json_output_80.json
-input-file: tests/data/input_80.py
+json-file: json_output.json
+input-file: input.py
 STEM-version: 1.2

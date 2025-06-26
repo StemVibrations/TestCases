@@ -1,3 +1,4 @@
+import os
 import json
 from schema import Schema, And, Use, SchemaError, Regex
 import yaml
@@ -99,6 +100,15 @@ def yaml_validator(yaml_path: str) -> bool:
         bool: True if valid, False if required fields are missing.
     """
 
+    # check if yaml file exists and size is greater than 2 bytes
+    if not os.path.isfile(yaml_path):
+        print(f"YAML file {yaml_path} does not exist.")
+        return False
+    if os.path.getsize(yaml_path) <= 2:
+        print(f"YAML file {yaml_path} is empty.")
+        return False
+
+    # load yaml file
     with open(yaml_path, 'r') as f:
         meta = yaml.safe_load(f)
 
@@ -114,5 +124,19 @@ def yaml_validator(yaml_path: str) -> bool:
         if not value:
             print(f"Metadata field '{key}' is empty.")
             return False
+
+    # check is json-file and input files exist and size is greater than 2 bytes
+    if not os.path.isfile(meta["json-file"]):
+        print(f"JSON file {meta['json-file']} does not exist.")
+        return False
+    if os.path.getsize(meta["json-file"]) <= 2:
+        print(f"JSON file {meta['json-file']} is empty.")
+        return False
+    if not os.path.isfile(meta["input-file"]):
+        print(f"Input file {meta['input-file']} does not exist.")
+        return False
+    if os.path.getsize(meta["input-file"]) <= 2:
+        print(f"Input file {meta['input-file']} is empty.")
+        return False
 
     return True
