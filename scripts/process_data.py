@@ -44,26 +44,33 @@ def main(folder_path: str):
             data = json.load(f)
 
         # Plotting the data
-        summary[";".join([meta["title"], meta["name"]])] = make_plot(data, meta)
+        summary[";".join([meta["title"], meta["name"]])] = process_plot_data(data, meta)
 
     # edit the hugo content files
     edit_content_file(summary)
 
 
 def edit_content_file(summary: dict):
+    """
+    Edits the Hugo content files to include the summary of processed data.
+
+    Parameters:
+        summary (dict): A dictionary containing the summary of processed data.
+    """
+
     pass
 
 
-def make_plot(data: dict, meta: dict) -> dict:
+def process_plot_data(data: dict, meta: dict) -> dict:
     """
-    Create a plot from the data and metadata.
+    Processes and creates a plot from the data and metadata.
 
     Parameters:
         data (dict): The data dictionary containing the JSON results.
         meta (dict): The metadata dictionary.
 
     Returns:
-        dict: A summary dictionary containing peak values and frequencies.
+        dict: A summary dictionary containing peak values, frequencies, and plot location.
     """
 
     output_folder = "static/images"
@@ -111,8 +118,10 @@ def make_plot(data: dict, meta: dict) -> dict:
 
     # create the summary
     summary = {"peak_velocity_y": np.max(np.abs(np.array(data[node]["VELOCITY_Y"])*1000)),
-               "peak_fft": np.max(signal.amplitude),
-               "freq_peak_fft": signal.frequency[np.argmax(signal.amplitude)]}
+               "peak_v_eff": np.max(signal.v_eff),
+               "peak_fft": np.max(signal.amplitude)*1000,
+               "freq_peak_fft": signal.frequency[np.argmax(signal.amplitude)],
+               "plot_location": os.path.join(output_folder, f"{meta['title']}.png")}
     return summary
 
 
