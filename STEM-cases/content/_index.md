@@ -17,3 +17,5 @@ In [summary]({{< ref "summary.md" >}}) you can find a summary of the test cases.
 [STEM installation](https://stemvibrations.readthedocs.io/v1.2/#stem-installation)
 
 [STEM code](https://github.com/StemVibrations/STEM)
+
+[Instructions for the test cases](https://github.com/StemVibrations/TestCases/blob/main/README.md)

@@ -23,7 +23,7 @@ To do this you need to create a new branch with the name of your test case, e.g.
 Then you can commit the results to this branch in the folder [data](/data) and create a pull request.
 If the results are not in the `data` folder, they won't be processed.
 
-To commit the results you need to prepare the test case yaml file, e.g. `test_case_number.yaml` file:
+To commit the results you need to prepare the test case yaml file, e.g. `test_case_number.yaml`.
 This yaml file must follow this structure:
 
 ```yaml
