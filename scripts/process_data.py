@@ -75,7 +75,7 @@ def edit_content_results(summary: dict):
         new_content.append(f"**Organization:** {summary[key]['meta']['name']}\n\n")
         new_content.append(f"**Date:** {summary[key]['meta']['date']}\n\n")
         new_content.append(f"**STEM Version:** {summary[key]['meta']['STEM-version']}\n\n")
-        new_content.append(f"![{summary[key]['meta']['title']}]({summary[key]['plot_location']})\n\n")
+        new_content.append(f"![{summary[key]['meta']['title']}](/{summary[key]['plot_location']})\n\n")
 
     # Replace the content between markers
     before_marker = content[:start_index]
