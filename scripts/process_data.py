@@ -44,7 +44,7 @@ def main(folder_path: str):
             data = json.load(f)
 
         # Plotting the data
-        summary[";".join([meta["title"], meta["name"]])] = process_plot_data(data, meta)
+        summary[";".join([meta["title"], meta["organisation"]])] = process_plot_data(data, meta)
 
     # edit the hugo content files
     edit_content_results(summary)
