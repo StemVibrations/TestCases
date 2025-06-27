@@ -8,7 +8,7 @@ import SignalProcessingTools.time_signal as time_signal
 from validators import json_validator, yaml_validator
 
 
-COORD_REF = [0.75, 7.1, 30]
+COORD_REF = [25, 0.7, 45]
 TOL = 1e-6
 
 
