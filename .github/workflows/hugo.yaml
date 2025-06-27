@@ -7,6 +7,10 @@ on:
       - 'data/**'
       - 'scripts/**'
 
+  push:
+    branches:
+      - main
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -78,6 +82,8 @@ jobs:
 
   # Deployment job
   deploy:
+    # Only run deployment on push to main (i.e., when PR is merged)
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
