@@ -6,7 +6,7 @@ This repository contains test cases for railway induced vibrations modelled with
 
 In order to run the test cases, you need to have STEM installed.
 You can find the installation instructions in the [STEM documentation](https://stemvibrations.readthedocs.io/v1.2/#stem-installation).
-In the test cases, the STEM version 1.2 is used.
+In the test cases, the STEM version 1.2.3 is used.
 
 For the test cases you also need to have [git](https://git-scm.com/) installed, in order to commit the results.
 
@@ -36,7 +36,7 @@ date: 2025-06-23
 json-file: json_output_test_case_number.json
 input-file: input_file_test_case_number.py
 mdpa-file: input_file_test_case_number.mdpa
-STEM-version: 1.2
+STEM-version: 1.2.3
 ```
 
 The `organisation` and `title` are self-explanatory.
@@ -46,7 +46,7 @@ The `json-file` field should contain the name of the JSON file with the results 
 The `input-file` field should contain the name of the input file used to run the test case.
 The `mdpa-file` field should contain the name of the MDPA file used to run the test case.
 This is a file that contains the model definition in Kratos Multiphysics format.
-The `STEM-version` field should contain the version of STEM. In principle this should be 1.2.
+The `STEM-version` field should contain the version of STEM. In principle this should be 1.2.3.
 
 You can find an example of the yaml file [here](inputs/example_yaml.yaml).
 Please make sure to replace the fields with your own values. Before committing the yaml file, please make sure that the `json-file` and `input-file` fields match the names of the files you are committing, and validate the yaml file.
@@ -91,7 +91,7 @@ You can find all the results in the [results page](https://stemvibrations.github
 ## Exploring the results
 
 If you want to explore the results of the test cases, you can download them from the [data folder](/data).
-You can use some of the [available scripts](scripts/process_data.py) to process the results and visualize them,
+You can see how the data is processed and visualized in the [available scripts](scripts/process_data.py),
 or you can use your own scripts to process and visualize the data.
 
 
