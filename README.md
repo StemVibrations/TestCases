@@ -13,8 +13,7 @@ For the test cases you also need to have [git](https://git-scm.com/) installed, 
 
 ### Running the test cases
 
-To run the test cases, you can download the example [python script](inputs/example_stem.py) and edit
-according to your test case needs.
+To run the test cases, you can download the example [python script](inputs/example_stem.py) and edit according to your test case needs.
 
 
 ### Committing the results
@@ -33,8 +32,8 @@ title: Test Case Title
 test-description: >
   The description of the test case goes here.
 date: 2025-06-23
-json-file: json_output_file_name.json
-input-file: input_file_name.py
+json-file: json_output_test_case_number.json
+input-file: input_file_test_case_number.py
 STEM-version: 1.2
 ```
 
@@ -51,11 +50,11 @@ You can validate your yaml file [here](https://www.yamllint.com/).
 
 You then need to commit the yaml file, JSON file and input file to the repository, in your branch and create a pull request.
 
-To create a branch and commit the files you can use the following commands (please replace `test_case_number`, `json_output_file_name.json`, and `input_file_name.py` with your own values):
+To create a branch and commit the files you can use the following commands (please replace `test_case_number`, `json_output_test_case_number.json`, and `input_file_test_case_number.py` with your own values):
 
 ```bash
 
-# Clone the repository (only needed once)
+# Clone the repository
 git clone https://github.com/StemVibrations/TestCases.git
 cd TestCases
 
@@ -63,7 +62,7 @@ cd TestCases
 git checkout -b test_case_number
 
 # Add the test case yaml file, JSON output file and input file
-git add data/test_case_number.yaml data/json_output_file_name.json data/input_file_name.py
+git add data/test_case_number.yaml data/json_output_test_case_number.json data/input_file_test_case_number.py
 git commit -m "Add test case number"
 git push origin test_case_number
 ```
