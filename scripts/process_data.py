@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import SignalProcessingTools.time_signal as time_signal
 
-from validators import json_validator, yaml_validator
+from validators import json_validator, yaml_validator, mdpa_validator
 
 
 COORD_REF = [25, 0.7, 45]
@@ -43,8 +43,16 @@ def main(folder_path: str):
         with open(os.path.join("data", meta["json-file"]), "r") as f:
             data = json.load(f)
 
+        # validate mdpa file
+        if not mdpa_validator(os.path.join("data", meta["mdpa-file"])):
+            print(f"Validation failed for MDPA file: {meta['mdpa-file']}")
+            raise ValueError(f"Invalid MDPA file: {meta['mdpa-file']}")
+
+        with open(os.path.join("data", meta["mdpa-file"]), "r") as f:
+            mdpa_content = f.read().splitlines()
+
         # Plotting the data
-        summary[";".join([meta["title"], meta["organisation"]])] = process_plot_data(data, meta)
+        summary[";".join([meta["title"], meta["organisation"]])] = process_plot_data(data, meta, mdpa_content)
 
     # edit the hugo content files
     edit_content_results(summary)
@@ -124,13 +132,14 @@ def edit_content_summary(summary: dict):
 
 
 
-def process_plot_data(data: dict, meta: dict) -> dict:
+def process_plot_data(data: dict, meta: dict, mdpa: dict) -> dict:
     """
     Processes and creates a plot from the data and metadata.
 
     Parameters:
         data (dict): The data dictionary containing the JSON results.
         meta (dict): The metadata dictionary.
+        mdpa (dict): The MDPA content as a list of strings.
 
     Returns:
         dict: A summary dictionary containing peak values, frequencies, and plot location.
@@ -142,23 +151,43 @@ def process_plot_data(data: dict, meta: dict) -> dict:
 
     # define the node
     node = None
-    for key in data.keys():
-        if key.startswith("NODE_"):
-            if np.linalg.norm(np.array(data[key]["COORDINATES"]) - np.array(COORD_REF)) < TOL:
-                node = key
+
+    # read the mdpa file and its nodes
+    idx_ini = mdpa.index("Begin SubModelPart json_output")
+    idx_end = mdpa[idx_ini:].index("  End SubModelPartNodes")
+
+    mdpa_nodes = mdpa[idx_ini+4:idx_ini + idx_end]
+
+    index_nodes = mdpa.index("Begin Nodes")
+    index_end_nodes = mdpa[index_nodes:].index("End Nodes")
+    aux = [j for i in mdpa_nodes for j, k in enumerate(mdpa[index_nodes:index_nodes + index_end_nodes]) if k.split()[0] == i.lstrip()]
+
+    mdpa_nodes = [mdpa[index_nodes + i].split() for i in aux]
+
+    for nod in mdpa_nodes:
+        if np.linalg.norm(np.array(nod[1:]).astype(float) - np.array(COORD_REF)) < TOL:
+            node = f"NODE_{nod[0]}"
 
     if node is None:
         raise ValueError("The reference node was not found. Please use the reference mesh.")
+
+    if node not in data.keys():
+        raise ValueError(f"The node {node} was not found in the data. Please check the JSON file.")
 
     # process the time signal
     signal = time_signal.TimeSignalProcessing(data["TIME"],
                                               np.array(data[node]["VELOCITY_Y"]))
     signal.fft(half_representation=True)
+    if signal.signal.shape[0]  % 2 != 0:
+        signal.signal = signal.signal[:-1]  # ensure even length for FFT
+        time_veff = signal.time[:-1]
+    else:
+        time_veff = signal.time
     signal.v_eff_SBR()
 
     fig, ax = plt.subplots(ncols=3, nrows=1, figsize=(15, 4))
     ax[0].plot(data["TIME"], np.array(data[node]["VELOCITY_Y"])*1000, label=r"v$_{y}$", color="blue")
-    ax[1].plot(data["TIME"], signal.v_eff, label=r"v$_{eff}$", color="orange")
+    ax[1].plot(time_veff, signal.v_eff, label=r"v$_{eff}$", color="orange")
     ax[2].plot(signal.frequency, signal.amplitude*1000, label=r"v$_{y}$", color="blue")
     ax[0].set_xlabel("Time (s)")
     ax[0].set_ylabel("Velocity Y (mm/s)")

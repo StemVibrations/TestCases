@@ -5,4 +5,5 @@ test-description: >
 date: 2025-06-23
 json-file: json_output.json
 input-file: input.py
+mdpa-file: case_1.mdpa
 STEM-version: 1.2

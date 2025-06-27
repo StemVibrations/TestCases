@@ -13,16 +13,9 @@ def __definitions() -> Schema:
     """
 
     conf_schema_node = Schema({
-        "COORDINATES": And(list, lambda l: len(l) == 3, [Use(float)]),
-        "DISPLACEMENT_X": And(list, lambda l: len(l) > 0, [Use(float)]),
-        "DISPLACEMENT_Y": And(list, lambda l: len(l) > 0, [Use(float)]),
-        "DISPLACEMENT_Z": And(list, lambda l: len(l) > 0, [Use(float)]),
         "VELOCITY_X": And(list, lambda l: len(l) > 0, [Use(float)]),
         "VELOCITY_Y": And(list, lambda l: len(l) > 0, [Use(float)]),
         "VELOCITY_Z": And(list, lambda l: len(l) > 0, [Use(float)]),
-        "ACCELERATION_X": And(list, lambda l: len(l) > 0, [Use(float)]),
-        "ACCELERATION_Y": And(list, lambda l: len(l) > 0, [Use(float)]),
-        "ACCELERATION_Z": And(list, lambda l: len(l) > 0, [Use(float)]),
     })
 
     conf_schema_json = Schema({
@@ -34,7 +27,7 @@ def __definitions() -> Schema:
 
 def __check_lenghts(data: dict) -> bool:
     """
-    Checks if the lengths of TIME and displacement arrays are consistent across all nodes.
+    Checks if the lengths of TIME and VELOCITY arrays are consistent across all nodes.
 
     Parameters:
         data (dict): Parsed JSON data.
@@ -45,23 +38,23 @@ def __check_lenghts(data: dict) -> bool:
     time_len = len(data["TIME"])
     for key, value in data.items():
         if key.startswith("NODE_"):
-            dx = len(value["DISPLACEMENT_X"])
-            dy = len(value["DISPLACEMENT_Y"])
-            dz = len(value["DISPLACEMENT_Z"])
+            dx = len(value["VELOCITY_X"])
+            dy = len(value["VELOCITY_Y"])
+            dz = len(value["VELOCITY_Z"])
 
             if not (dx == dy == dz == time_len):
                 print(f"Length mismatch in {key}: "
                       f"TIME={time_len}"
-                      f"DISPLACEMENT_X={dx}",
-                      f"DISPLACEMENT_Y={dy}",
-                      f"DISPLACEMENT_Z={dz}")
+                      f"VELOCITY_X={dx}",
+                      f"VELOCITY_Y={dy}",
+                      f"VELOCITY_Z={dz}")
                 return False
     return True
 
 
 def json_validator(json_path: str) -> bool:
     """
-    Validates a JSON file against expected structure and displacement length consistency.
+    Validates a JSON file against expected structure and velocity length consistency.
 
     Parameters:
         json_path (str): Path to the JSON file.
@@ -85,7 +78,7 @@ def json_validator(json_path: str) -> bool:
 
     # Custom cross-field validation
     if __check_lenghts(data) == False:
-        print("Length mismatch found in displacement data.")
+        print("Length mismatch found in velocity data.")
         return False
     return True
 
@@ -115,7 +108,7 @@ def yaml_validator(yaml_path: str) -> bool:
     with open(yaml_path, 'r') as f:
         meta = yaml.safe_load(f)
 
-    required_keys = ["organisation", "title", "test-description","date", "json-file", "input-file", "STEM-version"]
+    required_keys = ["organisation", "title", "test-description","date", "json-file", "input-file", "STEM-version", "mdpa-file"]
     # check if all required keys are present
     for key in required_keys:
         if key not in meta:
@@ -140,6 +133,26 @@ def yaml_validator(yaml_path: str) -> bool:
         return False
     if os.path.getsize(os.path.join(yaml_dir, meta["input-file"])) <= 2:
         print(f"Input file {meta['input-file']} is empty.")
+        return False
+
+    return True
+
+def mdpa_validator(mdpa_path: str) -> bool:
+    """
+    Validates a MDPA file for required metadata fields.
+
+    Parameters:
+        mdpa_path (str): Path to the MDPA file.
+    Returns:
+        bool: True if valid, False if required fields are missing.
+    """
+
+    # check if mdpa file exists and size is greater than 2 bytes
+    if not os.path.isfile(mdpa_path):
+        print(f"MDPA file {mdpa_path} does not exist.")
+        return False
+    if os.path.getsize(mdpa_path) <= 2:
+        print(f"MDPA file {mdpa_path} is empty.")
         return False
 
     return True
