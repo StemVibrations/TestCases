@@ -13,7 +13,8 @@ For the test cases you also need to have [git](https://git-scm.com/) installed, 
 
 ### Running the test cases
 
-To run the test cases, you can download the example [python script](inputs/example_stem.py) and edit according to your test case needs.
+To run the test cases, you can download the example python scripts for [soft soil](inputs/soft_soil.py) and
+[stiff soil](inputs/stiff_soil.py) and edit according to your test case needs.
 
 
 ### Committing the results
