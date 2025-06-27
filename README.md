@@ -6,7 +6,7 @@ This repository contains test cases for railway induced vibrations modelled with
 
 In order to run the test cases, you need to have STEM installed.
 You can find the installation instructions in the [STEM documentation](https://stemvibrations.readthedocs.io/v1.2/#stem-installation).
-In the test cases, the STEM version 1.2 is used.
+In the test cases, the STEM version 1.2.3 is used.
 
 For the test cases you also need to have [git](https://git-scm.com/) installed, in order to commit the results.
 
