@@ -1,0 +1,9 @@
+organisation: Deltares
+title: Test case 0 soft soil
+test-description: >
+  This is the file for test case 0 with soft soil
+date: 2025-06-30
+json-file: json_output_case_0_soft.json
+input-file: case_0_soft.py
+mdpa-file: json_output_case_0_soft.mdpa
+STEM-version: 1.2.3
