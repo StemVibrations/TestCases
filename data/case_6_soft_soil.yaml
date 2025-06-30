@@ -1,0 +1,9 @@
+organisation: Witteveen+Bos
+title: Test 6
+test-description: >
+  Test case 6: Soft soil model with changed depth of deepwall to XX m.
+date: 2025-06-30
+json-file: json_output_case_6_soft.json
+input-file: case_6_soft.py
+mdpa-file: json_output_case_6_soft.mdpa
+STEM-version: 1.2.3
