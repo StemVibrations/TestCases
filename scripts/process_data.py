@@ -21,6 +21,10 @@ def main(folder_path: str):
     Parameters:
         folder_path (str): Path to the folder containing YAML files.
     """
+
+    if not os.path.exists(folder_path):
+        return
+
     yaml_files = os.listdir(folder_path)
     yaml_files = [os.path.join(folder_path, file) for file in yaml_files if file.endswith('.yaml')]
 
