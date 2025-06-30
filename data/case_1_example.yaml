@@ -1,9 +1,0 @@
-organisation: Deltares
-title: Test 1
-test-description: >
-  This is the file for test 1
-date: 2025-06-23
-json-file: json_output_case_1_example.json
-input-file: case_1_example.py
-mdpa-file: json_output_case_1_example.mdpa
-STEM-version: 1.2
