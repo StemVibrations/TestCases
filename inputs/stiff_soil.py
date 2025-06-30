@@ -1,5 +1,5 @@
 
-input_files_dir = "holten_files_dir"
+input_files_dir = "stiff_soil_files_dir"
 results_dir = "output"
 
 from stem.model import Model
@@ -242,7 +242,7 @@ solver_settings = SolverSettings(analysis_type=AnalysisType.MECHANICAL,
                                  linear_solver_settings=Cg(scaling=True))
 
 # Set up problem data
-problem = Problem(problem_name="schalkwijk", number_of_threads=8,
+problem = Problem(problem_name="stiff_soil", number_of_threads=8,
                   settings=solver_settings)
 model.project_parameters = problem
 
