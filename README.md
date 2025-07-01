@@ -10,6 +10,8 @@ In the test cases, the STEM version 1.2.3 is used.
 
 For the test cases you also need to have [git](https://git-scm.com/) installed, in order to commit the results.
 
+The presentation with the overview of the test cases can be found [here](inputs/STEM.pptx).
+
 
 ### Running the test cases
 
