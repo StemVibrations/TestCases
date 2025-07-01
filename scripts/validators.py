@@ -90,10 +90,16 @@ def json_validator(json_path: str, stem_version: str) -> bool:
         print(f"Failed to load JSON: {e}")
         return False
 
+    # Load the schema based on the STEM version
     if stem_version == "1.2.3":
         conf_schema = __definitions_v123()
-    else:
+    elif stem_version == "1.2.4.a":
         conf_schema = __definitions_alpha()
+    else:
+        print(f"Unsupported STEM version: {stem_version}")
+        return False
+
+    # Validate the JSON structure
     try:
         conf_schema.validate(data)
     except SchemaError as e:

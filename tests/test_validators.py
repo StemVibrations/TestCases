@@ -11,6 +11,23 @@ def test_json_validator():
     assert json_validator("tests/data/json_output_80_alpha.json", "1.2.4.a")
 
 
+def test_json_validator_wrong_version(capsys):
+    """
+    Test with a valid JSON file and wrong version
+    """
+
+    # Call the function with a non-existent file
+    result = json_validator("tests/data/json_output_80.json", "1.2.5")
+
+    # Capture the printed output
+    captured = capsys.readouterr()
+
+    # Assert that the function returns False
+    assert not result
+
+    # Assert that the printed message contains "file not found"
+    assert "Unsupported STEM version: 1.2.5" in captured.out
+
 
 def test_json_validator_file_not_found(capsys):
     """
