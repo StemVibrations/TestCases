@@ -5,15 +5,19 @@ def test_json_validator():
     """
     Test with a valid JSON file
     """
-    assert json_validator("tests/data/json_output_80.json")
-    assert json_validator("tests/data/json_output_120.json")
+    assert json_validator("tests/data/json_output_80.json", "1.2.3")
+    assert json_validator("tests/data/json_output_120.json", "1.2.3")
+
+    assert json_validator("tests/data/json_output_80_alpha.json", "1.2.4.a")
+
+
 
 def test_json_validator_file_not_found(capsys):
     """
     Test the json_validator function with a non-existent file.
     """
     # Call the function with a non-existent file
-    result = json_validator("tests/data/non_existent_file.json")
+    result = json_validator("tests/data/non_existent_file.json", "1.2.3")
 
     # Capture the printed output
     captured = capsys.readouterr()
@@ -30,7 +34,7 @@ def test_json_validator_invalid_json(capsys):
     Test the json_validator function with an invalid JSON file.
     """
     # Call the function
-    result = json_validator("tests/data/json_output_80_length.json")
+    result = json_validator("tests/data/json_output_80_length.json", "1.2.3")
 
     # Capture the printed output
     captured = capsys.readouterr()
