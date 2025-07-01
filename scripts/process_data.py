@@ -40,7 +40,7 @@ def main(folder_path: str):
             meta = yaml.safe_load(f)
 
         # validate JSON files
-        if not json_validator(os.path.join("data", meta["json-file"])):
+        if not json_validator(os.path.join("data", meta["json-file"]), meta["STEM-version"]):
             print(f"Validation failed for JSON file: {meta['json-file']}")
             raise ValueError(f"Invalid JSON file: {meta['json-file']}")
 

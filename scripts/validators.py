@@ -5,7 +5,28 @@ import yaml
 
 
 
-def __definitions() -> Schema:
+def __definitions_alpha() -> Schema:
+    """
+    Defines the configuration schema for the validation of the input json file
+
+    return: Schema configuration file
+    """
+
+    conf_schema_node = Schema({
+        "COORDINATES": And(list, lambda l: len(l) == 3, [Use(float)]),
+        "VELOCITY_X": And(list, lambda l: len(l) > 0, [Use(float)]),
+        "VELOCITY_Y": And(list, lambda l: len(l) > 0, [Use(float)]),
+        "VELOCITY_Z": And(list, lambda l: len(l) > 0, [Use(float)]),
+    })
+
+    conf_schema_json = Schema({
+        "TIME": And(list, lambda l: len(l) > 0, [Use(float)]),
+        Regex(r'^NODE_\d+$'): conf_schema_node,
+    })
+
+    return conf_schema_json
+
+def __definitions_v123() -> Schema:
     """
     Defines the configuration schema for the validation of the input json file
 
@@ -52,7 +73,7 @@ def __check_lenghts(data: dict) -> bool:
     return True
 
 
-def json_validator(json_path: str) -> bool:
+def json_validator(json_path: str, stem_version: str) -> bool:
     """
     Validates a JSON file against expected structure and velocity length consistency.
 
@@ -69,7 +90,16 @@ def json_validator(json_path: str) -> bool:
         print(f"Failed to load JSON: {e}")
         return False
 
-    conf_schema = __definitions()
+    # Load the schema based on the STEM version
+    if stem_version == "1.2.3":
+        conf_schema = __definitions_v123()
+    elif stem_version == "1.2.4.a":
+        conf_schema = __definitions_alpha()
+    else:
+        print(f"Unsupported STEM version: {stem_version}")
+        return False
+
+    # Validate the JSON structure
     try:
         conf_schema.validate(data)
     except SchemaError as e:
