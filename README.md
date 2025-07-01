@@ -10,6 +10,8 @@ In the test cases, the STEM version 1.2.3 is used.
 
 For the test cases you also need to have [git](https://git-scm.com/) installed, in order to commit the results.
 
+The presentation with the overview of the test cases can be found [here](inputs/STEM.pptx).
+
 
 ### Running the test cases
 
@@ -48,6 +50,13 @@ The `mdpa-file` field should contain the name of the MDPA file used to run the t
 This is a file that contains the model definition in Kratos Multiphysics format.
 The `STEM-version` field should contain the version of STEM. In principle this should be 1.2.3.
 
+Please note, that STEM produces two `.json` and two `.mdpa` results files. This is because the  calculation is run in two stages:
+
+* First stage static initialisation
+* Second stage dynamic loading
+
+Please only commit the `.json` and `.mdpa` files of the second stage.
+
 You can find an example of the yaml file [here](inputs/example_yaml.yaml).
 Please make sure to replace the fields with your own values. Before committing the yaml file, please make sure that the `json-file` and `input-file` fields match the names of the files you are committing, and validate the yaml file.
 You can validate your yaml file [here](https://www.yamllint.com/).
@@ -66,7 +75,7 @@ cd TestCases
 git checkout -b test_case_number
 
 # Add the test case yaml file, JSON output file and input file
-git add data/test_case_number.yaml data/json_output_test_case_number.json data/input_file_test_case_number.py
+git add data/test_case_number.yaml data/json_output_test_case_number.json data/input_file_test_case_number.mdpa data/input_file_test_case_number.py
 git commit -m "Add test case number"
 git push origin test_case_number
 ```
