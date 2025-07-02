@@ -9,4 +9,4 @@ date         : 2025-07-02
 json-file    : json_output_case_8_stiff.json
 input-file   : case_8_stiff.py
 mdpa-file    : mdpa_output_case_8_stiff.mdpa
-STEM-version : 1.2.3
+STEM-version : 1.2.4a
