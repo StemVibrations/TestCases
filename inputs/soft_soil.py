@@ -266,7 +266,7 @@ model.set_mesh_size(element_size=1)
 
 
 # define at which points the json output should be written
-delta_time = 0.001
+delta_time = 0.0005
 json_output_parameters = JsonOutputParameters(delta_time-1e-10, [NodalOutput.VELOCITY],[])
 model.add_output_settings_by_coordinates([(x_coordinate_end_ditch, surface_level, 45.0), (25, surface_level, 45.0), (max_x_coordinate,surface_level,45)],
                                          json_output_parameters, "json_output")
