@@ -1,5 +1,6 @@
 
-input_files_dir = "holten_files_dir"
+input_files_dir = "stiff_files_dir"
+
 results_dir = "output"
 
 from stem.model import Model
@@ -120,7 +121,7 @@ soil_equivalent_parameters = ElasticSpringDamper(NODAL_DISPLACEMENT_STIFFNESS=[0
                                                  NODAL_ROTATIONAL_DAMPING_COEFFICIENT=[0, 0, 0])
 
 sleeper_distance =0.6
-n_sleepers = 301
+n_sleepers = 334
 rail_pad_thickness = 0.025
 
 # create a straight track with rails, sleepers, rail pads and a 1D soil extension
@@ -242,7 +243,7 @@ solver_settings = SolverSettings(analysis_type=AnalysisType.MECHANICAL,
                                  linear_solver_settings=Cg(scaling=True))
 
 # Set up problem data
-problem = Problem(problem_name="schalkwijk", number_of_threads=16,
+problem = Problem(problem_name="holten", number_of_threads=16,
                   settings=solver_settings)
 model.project_parameters = problem
 
@@ -268,7 +269,7 @@ model.show_geometry()
 stem = Stem(model, input_files_dir)
 
 # create a new stage, and set the differences compared to stage 1
-duration_stage_2 = 3.2
+duration_stage_2 = 3.7
 stage2 = stem.create_new_stage(delta_time,duration_stage_2)
 stage2.project_parameters.settings.solution_type = SolutionType.DYNAMIC
 stage2.project_parameters.settings.linear_solver_settings = Cg(scaling=False)
