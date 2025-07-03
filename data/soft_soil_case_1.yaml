@@ -1,0 +1,9 @@
+organisation: We-Boost
+title: Test 1 - Soft soil, stiffer rails
+test-description: >
+  Doubled the rail stiffness (I33)
+date: 2025-06-30
+json-file: soft_soil_case_1.json
+input-file: soft_soil_case_1.py
+mdpa-file: soft_soil_case_1.mdpa
+STEM-version: 1.2.4.a
