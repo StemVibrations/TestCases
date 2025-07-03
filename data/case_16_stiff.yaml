@@ -1,0 +1,12 @@
+organisation : Level Acoustics & Vibration
+title        : Rayleigh damping, stiff soil
+test-description: >
+  Stiffness damping increased from 0,786E-4 to 1,04E-4
+
+  Note : integration time 0.0005 (but output still 0.001)
+  Speed: this ran in about 17 hours (10 cores, i9, actual speed 4,5GHz.)
+date         : 2025-07-02
+json-file    : json_output_case_16_stiff.json
+input-file   : case_16_stiff.py
+mdpa-file    : mdpa_output_case_16_stiff.mdpa
+STEM-version : 1.2.4.a
