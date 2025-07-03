@@ -1,0 +1,10 @@
+organisation: Deltares
+title: Test case 0 stiff soil
+test-description: >
+  Test case 0
+  This is the base case with stiff soil
+date: 2025-06-30
+json-file: json_output_case_0_stiff.json
+input-file: case_0_soft.py
+mdpa-file: json_output_case_0_stiff.mdpa
+STEM-version: 1.2.3
