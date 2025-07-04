@@ -2,6 +2,7 @@ import os
 import json
 from schema import Schema, And, Use, SchemaError, Regex
 import yaml
+from schema import Optional
 
 
 
@@ -13,7 +14,7 @@ def __definitions() -> Schema:
     """
 
     conf_schema_node = Schema({
-        "COORDINATES": And(list, lambda l: len(l) == 3, [Use(float)]),
+        Optional("COORDINATES"): And(list, lambda l: len(l) == 3, [Use(float)]),
         "VELOCITY_X": And(list, lambda l: len(l) > 0, [Use(float)]),
         "VELOCITY_Y": And(list, lambda l: len(l) > 0, [Use(float)]),
         "VELOCITY_Z": And(list, lambda l: len(l) > 0, [Use(float)]),
