@@ -269,7 +269,7 @@ model.show_geometry()
 stem = Stem(model, input_files_dir)
 
 # create a new stage, and set the differences compared to stage 1
-duration_stage_2 = 3.7
+duration_stage_2 = 3.45
 stage2 = stem.create_new_stage(delta_time,duration_stage_2)
 stage2.project_parameters.settings.solution_type = SolutionType.DYNAMIC
 stage2.project_parameters.settings.linear_solver_settings = Cg(scaling=False)
