@@ -1,0 +1,13 @@
+organisation : Level Acoustics & Vibration
+title        : Track irregularity, soft soil
+test-description: >
+  Irr_Av is increased from 2.1E-5 to 2.1E-4
+
+  Note : integration time 0.0005 (but output still 0.001)
+  Speed: this ran in about 60 hours (8 cores used, i9, actual speed 2,5GHz.)
+  STEM version was actually 1.2.3
+date         : 2025-07-03
+json-file    : json_output_case_8_soft.json
+input-file   : case_8_soft.py
+mdpa-file    : mdpa_output_case_8_soft.mdpa
+STEM-version : 1.2.4.a
