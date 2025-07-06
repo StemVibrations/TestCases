@@ -1,0 +1,12 @@
+organisation : Level Acoustics & Vibration
+title        : Combined: rail stiffness, wheel mass; stiff soil
+test-description: >
+  Rail stiffness (I33) doubled, wheel mass doubled
+
+  Note : integration time 0.0005 (but output still 0.001)
+  Speed: this ran in about 11 hours (16 cores, i9, actual speed 2,5GHz.)
+date         : 2025-07-06
+json-file    : json_output_case_21_stiff.json
+input-file   : case_21_stiff.py
+mdpa-file    : mdpa_output_case_21_stiff.mdpa
+STEM-version : 1.2.4.a
