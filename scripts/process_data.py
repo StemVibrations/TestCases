@@ -4,6 +4,7 @@ import yaml
 import numpy as np
 import matplotlib.pyplot as plt
 import SignalProcessingTools.time_signal as time_signal
+from SignalProcessingTools.time_signal import Windows
 
 from validators import json_validator, yaml_validator, mdpa_validator
 
@@ -116,14 +117,14 @@ def edit_content_summary(summary: dict):
     start_index = content.find(start_marker)
 
     # Generate the new content
-    new_content = ["| Test case | V_y,max | V_eff,max | FFT,max | Freq_FFT,max  |\n"]
+    new_content = ["| Test case | V_y,max | V_eff,max | PSD,max | Freq_PSD,max  |\n"]
     new_content.append("|-----|-----|-----|-----|-----|\n")
     for key in sorted(summary.keys()):
         new_content.append(f"| {summary[key]['meta']['title']} | "
                            f"{round(summary[key]['peak_velocity_y'], 3)} | "
                            f"{round(summary[key]["peak_v_eff"], 3)} | "
-                           f"{round(summary[key]["peak_fft"], 3)} | "
-                           f"{round(summary[key]["freq_peak_fft"], 3)} |\n")
+                           f"{round(summary[key]["peak_psd"], 4)} | "
+                           f"{round(summary[key]["freq_peak_psd"], 3)} |\n")
 
     # Replace the content between markers
     before_marker = content[:start_index]
@@ -180,25 +181,22 @@ def process_plot_data(data: dict, meta: dict, mdpa: dict) -> dict:
 
     # process the time signal
     signal = time_signal.TimeSignalProcessing(data["TIME"],
-                                              np.array(data[node]["VELOCITY_Y"]))
-    signal.fft(half_representation=True)
-    if signal.signal.shape[0]  % 2 != 0:
-        signal.signal = signal.signal[:-1]  # ensure even length for FFT
-        time_veff = signal.time[:-1]
-    else:
-        time_veff = signal.time
+                                              np.array(data[node]["VELOCITY_Y"]),
+                                              window=Windows.HAMMING,
+                                              window_size=2000)
+    signal.psd()
     signal.v_eff_SBR()
 
     fig, ax = plt.subplots(ncols=3, nrows=1, figsize=(15, 4))
     ax[0].plot(data["TIME"], np.array(data[node]["VELOCITY_Y"])*1000, label=r"v$_{y}$", color="blue")
-    ax[1].plot(time_veff, signal.v_eff, label=r"v$_{eff}$", color="orange")
-    ax[2].plot(signal.frequency, signal.amplitude*1000, label=r"v$_{y}$", color="blue")
+    ax[1].plot(data["TIME"], signal.v_eff[:len(data["TIME"])], label=r"v$_{eff}$", color="orange")
+    ax[2].plot(signal.frequency_Pxx, signal.Pxx*1000**2, label=r"v$_{y}$", color="blue")
     ax[0].set_xlabel("Time (s)")
     ax[0].set_ylabel("Velocity Y (mm/s)")
     ax[1].set_xlabel("Time (s)")
-    ax[1].set_ylabel("V_eff (mm/s)")
+    ax[1].set_ylabel("V$_eff$ (mm/s)")
     ax[2].set_xlabel("Frequency (Hz)")
-    ax[2].set_ylabel("FFT Magnitude (mm/s/s)")
+    ax[2].set_ylabel("PSD ([mm/s]$^2$/Hz)")
     ax[0].set_xlim(left=0)
     ax[1].set_xlim(left=0)
     ax[2].set_xlim(0, 100)
@@ -210,14 +208,15 @@ def process_plot_data(data: dict, meta: dict, mdpa: dict) -> dict:
     ax[0].legend()
     ax[1].legend()
     ax[2].legend()
+    plt.tight_layout()
     plt.savefig(os.path.join(output_folder, f"{name}.png"))
     plt.close()
 
     # create the summary
     summary = {"peak_velocity_y": np.max(np.abs(np.array(data[node]["VELOCITY_Y"])*1000)),
                "peak_v_eff": np.max(signal.v_eff),
-               "peak_fft": np.max(signal.amplitude)*1000,
-               "freq_peak_fft": signal.frequency[np.argmax(signal.amplitude)],
+               "peak_psd": np.max(signal.Pxx)*1000**2,
+               "freq_peak_psd": signal.frequency_Pxx[np.argmax(signal.Pxx)],
                "plot_location": f"{name}.png",
                "meta": meta}
     return summary

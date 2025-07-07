@@ -2,10 +2,11 @@ import os
 import json
 from schema import Schema, And, Use, SchemaError, Regex
 import yaml
+from schema import Optional
 
 
 
-def __definitions_alpha() -> Schema:
+def __definitions() -> Schema:
     """
     Defines the configuration schema for the validation of the input json file
 
@@ -13,7 +14,7 @@ def __definitions_alpha() -> Schema:
     """
 
     conf_schema_node = Schema({
-        "COORDINATES": And(list, lambda l: len(l) == 3, [Use(float)]),
+        Optional("COORDINATES"): And(list, lambda l: len(l) == 3, [Use(float)]),
         "VELOCITY_X": And(list, lambda l: len(l) > 0, [Use(float)]),
         "VELOCITY_Y": And(list, lambda l: len(l) > 0, [Use(float)]),
         "VELOCITY_Z": And(list, lambda l: len(l) > 0, [Use(float)]),
@@ -26,25 +27,6 @@ def __definitions_alpha() -> Schema:
 
     return conf_schema_json
 
-def __definitions_v123() -> Schema:
-    """
-    Defines the configuration schema for the validation of the input json file
-
-    return: Schema configuration file
-    """
-
-    conf_schema_node = Schema({
-        "VELOCITY_X": And(list, lambda l: len(l) > 0, [Use(float)]),
-        "VELOCITY_Y": And(list, lambda l: len(l) > 0, [Use(float)]),
-        "VELOCITY_Z": And(list, lambda l: len(l) > 0, [Use(float)]),
-    })
-
-    conf_schema_json = Schema({
-        "TIME": And(list, lambda l: len(l) > 0, [Use(float)]),
-        Regex(r'^NODE_\d+$'): conf_schema_node,
-    })
-
-    return conf_schema_json
 
 def __check_lenghts(data: dict) -> bool:
     """
@@ -91,10 +73,8 @@ def json_validator(json_path: str, stem_version: str) -> bool:
         return False
 
     # Load the schema based on the STEM version
-    if stem_version == "1.2.3":
-        conf_schema = __definitions_v123()
-    elif stem_version == "1.2.4.a":
-        conf_schema = __definitions_alpha()
+    if (stem_version == "1.2.3") or (stem_version == "1.2.4.a"):
+        conf_schema = __definitions()
     else:
         print(f"Unsupported STEM version: {stem_version}")
         return False
