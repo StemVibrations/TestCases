@@ -1,5 +1,5 @@
 organisation : Level Acoustics & Vibration
-title        : Rayleigh damping, stiff soil
+title        :  Test case 16 stiff soil, Rayleigh damping
 test-description: >
   Stiffness damping increased from 0,786E-4 to 1,04E-4
 
@@ -9,4 +9,4 @@ date         : 2025-07-02
 json-file    : json_output_case_16_stiff.json
 input-file   : case_16_stiff.py
 mdpa-file    : mdpa_output_case_16_stiff.mdpa
-STEM-version : 1.2.4.a
+STEM-version : 1.2.3
