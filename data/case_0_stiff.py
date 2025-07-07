@@ -243,7 +243,7 @@ solver_settings = SolverSettings(analysis_type=AnalysisType.MECHANICAL,
                                  linear_solver_settings=Cg(scaling=True))
 
 # Set up problem data
-problem = Problem(problem_name="holten", number_of_threads=16,
+problem = Problem(problem_name="stiff", number_of_threads=16,
                   settings=solver_settings)
 model.project_parameters = problem
 
