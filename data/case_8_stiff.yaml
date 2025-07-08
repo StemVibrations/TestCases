@@ -1,11 +1,11 @@
 organisation : Level Acoustics & Vibration
 title        :  Test case 8 stiff soil, Track irregularity
 test-description: >
-  Irr_Av is increased from 2.1E-5 to 2.1E-4
+  Irr_Av is decreased from 2.1E-5 to 2.1E-6
 
   Note : integration time 0.0005 (but output still 0.001)
-  Speed: this ran in about 16 hours (10 cores, i9, actual speed 4,5GHz.)
-date         : 2025-07-02
+  Speed: this ran in about 11 hours (12 cores, i9, actual speed 3,3GHz)
+date         : 2025-07-07
 json-file    : json_output_case_8_stiff.json
 input-file   : case_8_stiff.py
 mdpa-file    : mdpa_output_case_8_stiff.mdpa

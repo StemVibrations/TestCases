@@ -1,5 +1,5 @@
 
-input_files_dir = "stiff_soil_files_dir"
+input_files_dir = "case_8_stiff_dir"
 results_dir = "output"
 
 from stem.model import Model
@@ -119,8 +119,8 @@ soil_equivalent_parameters = ElasticSpringDamper(NODAL_DISPLACEMENT_STIFFNESS=[0
                                                  NODAL_DAMPING_COEFFICIENT=[0, 110e3, 0],
                                                  NODAL_ROTATIONAL_DAMPING_COEFFICIENT=[0, 0, 0])
 
-sleeper_distance =0.6
-n_sleepers = 301
+sleeper_distance   = 0.6
+n_sleepers         = 334
 rail_pad_thickness = 0.025
 
 # create a straight track with rails, sleepers, rail pads and a 1D soil extension
@@ -157,7 +157,7 @@ uvec_parameters = {"n_carts": 2, # number of carts [-]
                    "wheel_configuration": wheel_configuration, # initial position of the wheels [m]
                    "velocity": 0.0, # velocity of the UVEC [m/s]
                    "irr_parameters": {
-                            "Av": 2.095e-04,
+                            "Av": 2.095e-06,
                             "seed": 14
                             },
                    }
@@ -218,14 +218,14 @@ model.set_mesh_size(element_size=1.3)
 
 # define at which points the json output should be written
 delta_time = 0.0005
-delta_time_json = 0.001
+delta_time_json = 0.0005
 maxfactor = delta_time_json/delta_time
 json_output_parameters = JsonOutputParameters(delta_time_json-1e-10, [NodalOutput.VELOCITY],[])
 model.add_output_settings_by_coordinates([(x_coord_deep_wall+thickness_deep_wall, surface_level, 45.0), (25, surface_level, 45.0), (max_x_coordinate,surface_level,45)],
                                          json_output_parameters, "json_output")
 
 # set time integration parameters
-end_time = delta_time*2
+end_time = delta_time*4
 time_integration = TimeIntegration(start_time=0.0, end_time=end_time, delta_time=delta_time,
                                    reduction_factor=1, increase_factor=1, max_delta_time_factor=maxfactor)
 
@@ -244,7 +244,7 @@ solver_settings = SolverSettings(analysis_type=AnalysisType.MECHANICAL,
                                  linear_solver_settings=Cg(scaling=True))
 
 # Set up problem data
-problem = Problem(problem_name="stiff_soil", number_of_threads=8,
+problem = Problem(problem_name="stiff_soil", number_of_threads=12,
                   settings=solver_settings)
 model.project_parameters = problem
 
@@ -270,7 +270,7 @@ model.show_geometry()
 stem = Stem(model, input_files_dir)
 
 # create a new stage, and set the differences compared to stage 1
-duration_stage_2 = 3.2
+duration_stage_2 = 3.45
 stage2 = stem.create_new_stage(delta_time,duration_stage_2)
 stage2.project_parameters.settings.solution_type = SolutionType.DYNAMIC
 stage2.project_parameters.settings.linear_solver_settings = Cg(scaling=False)
