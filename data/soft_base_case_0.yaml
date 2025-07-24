@@ -6,5 +6,5 @@ test-description: >
 date: 2025-06-30
 json-file: json_output_case_0_soft.json
 input-file: case_0_soft.py
-mdpa-file: json_output_case_0_soft.mdpa
+mdpa-file: case_0_soft.mdpa
 STEM-version: 1.2.3
