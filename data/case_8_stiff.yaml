@@ -1,0 +1,13 @@
+organisation : Level Acoustics & Vibration
+title        :  Test case 8 stiff soil, Track irregularity
+test-description: >
+  The track irregularity parameter Av (scale factor of the variance)
+  irr_parameters.Av,
+  is decreased from 2.1E-5 to 2.1E-6
+  
+  Speed: this ran in about 11 hours (12 cores, i9, actual speed 3,3GHz)
+date         : 2025-07-07
+json-file    : json_output_case_8_stiff.json
+input-file   : case_8_stiff.py
+mdpa-file    : mdpa_output_case_8_stiff.mdpa
+STEM-version : 1.2.3
