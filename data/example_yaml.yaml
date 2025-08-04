@@ -1,9 +1,0 @@
-organisation: TNO
-title: Test 17-Soft soil
-test-description: >
-  This is the file for test 17
-date: 2025-07-22
-json-file: case_17_soft_json_output_stage_2.json
-input-file: soft_soil_case_17.py
-mdpa-file: case_17_soft_stage_2.mdpa
-STEM-version: 1.2.3
