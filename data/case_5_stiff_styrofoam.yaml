@@ -1,0 +1,11 @@
+organisation: Witteveen+Bos
+title: Test case 5 stiff soil - Styrofoam deepwall
+test-description: |
+  Test case 5
+  Effect of styrofoam deepwall in stiff soil
+  Material properties: E=5e6 N/m², rho=32 kg/m³, v=0.495
+date: 2025-08-12
+json-file: case_5_stiff_styrofoam_json_output_stage_2.json
+input-file: case_5_stiff_styrofoam.py
+mdpa-file: case_5_stiff_styrofoam_stiff_stage_2.mdpa
+STEM-version: 1.2.3
