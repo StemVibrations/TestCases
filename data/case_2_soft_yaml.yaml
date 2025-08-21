@@ -1,0 +1,9 @@
+organisation: Cohere Consultants
+title: Test 2
+test-description: >
+  This is the file for test 2 soft soil, changed the material parameters of the slab (foundation_top and foundation_bottom) to concrete: rho: 2400 kg/m3, E: 30 GPa, v: 0.2
+date: 2025-08-19
+json-file: case_2_results_soft.json
+input-file: case_2_soft.py
+mdpa-file: case_2_soft_mdpa.mdpa
+STEM-version: 1.2.3a0
