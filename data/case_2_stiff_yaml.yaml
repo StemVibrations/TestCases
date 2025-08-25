@@ -1,7 +1,10 @@
+---
 organisation: Cohere Consultants
 title: Test 2
 test-description: >
-  This is the file for test 2 stiff soil, changed the material parameters of the slab (foundation_top and foundation_bottom) to concrete: rho: 2400 kg/m3, E: 30 GPa, v: 0.2
+  This is the file for test 2 stiff soil, changed the material
+  parameters of the slab (foundation_top and foundation_bottom) to concrete:
+  rho: 2400 kg/m3, E: 30 GPa, v: 0.2
 date: 2025-08-25
 json-file: case_2_results_stiff.json
 input-file: case_2_stiff.py
