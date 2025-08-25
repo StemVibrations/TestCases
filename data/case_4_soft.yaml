@@ -5,7 +5,7 @@ test-description: >
   Changed the coordinates of the embankment point: (3.5, 2.2,
   0.0) -> (5.0, 2.2, 0.0)
 date: 2025-08-19
-json-file: json_output_case_4_stage_2.json
-input-file: soft_soil_case_4.py
-mdpa-file: json_output_case_4_stage_2.mdpa
+json-file: case_4_results_soft.json
+input-file: case_4_soft.py
+mdpa-file: mdpa_output_case_4_soft.mdpa
 STEM-version: 1.2
