@@ -1,0 +1,9 @@
+organisation: Cauberg Huygen
+title: Test case 9 - stiff soil
+test-description: >
+  Train velocity increased from 140 km/h to 160 km/h
+date: 2025-08-30
+json-file: case_9_stiff.json
+input-file: case_9_stiff.py
+mdpa-file: case_9_stiff.mdpa
+STEM-version: 1.2.3
