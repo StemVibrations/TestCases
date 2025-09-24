@@ -1,6 +1,6 @@
 ---
 organisation: Cohere Consultants
-title: Test 2
+title: Test 2 stiff
 test-description: >
   This is the file for test 2 stiff soil, changed the material
   parameters of the slab (foundation_top and foundation_bottom) to concrete:
