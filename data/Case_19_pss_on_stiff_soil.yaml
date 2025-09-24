@@ -1,0 +1,9 @@
+organisation: ProRail
+title: Case 19
+test-description: >
+  This is the file for case 19 change wheel mass on stiff soil. This is the calculation with the masss of the wheel halved.
+date: 2025-09-07
+json-file: Case_19_pss_on_stiff_soil.json
+input-file: Case_19_pss_on_stiff_soil.py
+mdpa-file: Case_19_pss_on_stiff_soil.mdpa
+STEM-version: 1.2.3

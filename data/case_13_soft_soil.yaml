@@ -1,0 +1,9 @@
+organisation: ProRail
+title: Test 13 - ditch
+test-description: >
+  This is the file for test 13 (soft soil) with ditch with clay (thus no ditch)
+date: 2025-08-29
+json-file: case_13_soft_soil.json
+input-file: case_13_soft_soil_ditch_with_clay.py
+mdpa-file: case_13_soft_soil.mdpa
+STEM-version: 1.2.3
