@@ -1,0 +1,11 @@
+organisation: Cohere Consultants
+title: Test 3
+test-description: >
+  This is the file for test 3 soft soil, changed the mass of the sleepers with a factor 2. The actual STEM version is 1.2.3a0 but
+  this is not supported by the validator, therefore the version here is changed
+  to 1.2.3, during the STEM session I was told 1.2.3a0 was oke to use.
+date: 2025-08-25
+json-file: case_3_results_soft.json
+input-file: case_3_soft.py
+mdpa-file: case_3_soft_mdpa.mdpa
+STEM-version: 1.2.3

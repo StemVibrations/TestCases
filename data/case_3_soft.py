@@ -58,19 +58,6 @@ material_embankment = SoilMaterial(
     SaturatedBelowPhreaticLevelLaw(),
 )
 
-# Concrete
-
-soil_formulation_concrete = OnePhaseSoil(
-    ndim, IS_DRAINED=True, DENSITY_SOLID=2400, POROSITY=0.0
-)
-constitutive_law_concrete = LinearElasticSoil(YOUNG_MODULUS=30e9, POISSON_RATIO=0.2)
-material_concrete = SoilMaterial(
-    "concrete",
-    soil_formulation_concrete,
-    constitutive_law_concrete,
-    SaturatedBelowPhreaticLevelLaw(),
-)
-
 
 # # fill in PPS parameters
 # soil_formulation_pps = OnePhaseSoil(ndim, IS_DRAINED=True, DENSITY_SOLID=None, POROSITY=None)
@@ -290,10 +277,10 @@ model.add_soil_layer_by_coordinates(
 )
 
 model.add_soil_layer_by_coordinates(
-    foundation_coordinates_top, material_concrete, "foundation_top"
+    foundation_coordinates_top, material_clay, "foundation_top"
 )
 model.add_soil_layer_by_coordinates(
-    foundation_coordinates_bottom, material_concrete, "foundation_bot"
+    foundation_coordinates_bottom, material_clay, "foundation_bot"
 )
 
 model.add_soil_layer_by_coordinates(
@@ -335,7 +322,7 @@ rail_pad_parameters = ElasticSpringDamper(
 
 sleeper_parameters = NodalConcentrated(
     NODAL_DISPLACEMENT_STIFFNESS=[0, 0, 0],
-    NODAL_MASS=140,
+    NODAL_MASS=140 * 2,
     NODAL_DAMPING_COEFFICIENT=[0, 0, 0],
 )
 
@@ -534,7 +521,7 @@ solver_settings = SolverSettings(
 )
 
 # Set up problem data
-problem = Problem(problem_name="soft", number_of_threads=16, settings=solver_settings)
+problem = Problem(problem_name="soft", number_of_threads=8, settings=solver_settings)
 model.project_parameters = problem
 
 
@@ -557,7 +544,7 @@ model.add_output_settings(
 )
 
 # show the geometry, to check if everything is correct
-model.show_geometry()
+# model.show_geometry()
 
 # create the stem object
 stem = Stem(model, input_files_dir)

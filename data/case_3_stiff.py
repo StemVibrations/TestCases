@@ -48,19 +48,6 @@ material_ballast = SoilMaterial(
     "ballast", soil_formulation_1, constitutive_law_1, SaturatedBelowPhreaticLevelLaw()
 )
 
-# Concrete
-
-soil_formulation_concrete = OnePhaseSoil(
-    ndim, IS_DRAINED=True, DENSITY_SOLID=2400, POROSITY=0.0
-)
-constitutive_law_concrete = LinearElasticSoil(YOUNG_MODULUS=30e9, POISSON_RATIO=0.2)
-material_concrete = SoilMaterial(
-    "concrete",
-    soil_formulation_concrete,
-    constitutive_law_concrete,
-    SaturatedBelowPhreaticLevelLaw(),
-)
-
 
 # # fill in PPS parameters
 # soil_formulation_pps = OnePhaseSoil(ndim, IS_DRAINED=True, DENSITY_SOLID=None, POROSITY=None)
@@ -175,10 +162,10 @@ soil_1_coordinates = (
 model.add_soil_layer_by_coordinates(ballast_coordinates, material_ballast, "ballast")
 
 model.add_soil_layer_by_coordinates(
-    foundation_coordinates_top, material_concrete, "foundation_top"
+    foundation_coordinates_top, material_sand, "foundation_top"
 )
 model.add_soil_layer_by_coordinates(
-    foundation_coordinates_bottom, material_concrete, "foundation_bot"
+    foundation_coordinates_bottom, material_sand, "foundation_bot"
 )
 
 model.add_soil_layer_by_coordinates(soil_1_coordinates, material_sand, "soil_layer_1")
@@ -198,7 +185,7 @@ rail_pad_parameters = ElasticSpringDamper(
 
 sleeper_parameters = NodalConcentrated(
     NODAL_DISPLACEMENT_STIFFNESS=[0, 0, 0],
-    NODAL_MASS=140,
+    NODAL_MASS=140 * 2,
     NODAL_DAMPING_COEFFICIENT=[0, 0, 0],
 )
 
