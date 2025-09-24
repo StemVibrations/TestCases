@@ -1,0 +1,14 @@
+---
+organisation: Cohere Consultants
+title: Test 2
+test-description: >
+  This is the file for test 2 stiff soil, changed the material
+  parameters of the slab (foundation_top and foundation_bottom) to concrete:
+  rho: 2400 kg/m3, E: 30 GPa, v: 0.2. The actual STEM version is 1.2.3a0 but
+  this is not supported by the validator, therefore the version here is changed
+  to 1.2.3, during the STEM session I was told 1.2.3a0 was oke to use.
+date: 2025-08-25
+json-file: case_2_results_stiff.json
+input-file: case_2_stiff.py
+mdpa-file: case_2_stiff_mdpa.mdpa
+STEM-version: 1.2.3
