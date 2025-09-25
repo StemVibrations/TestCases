@@ -1,0 +1,9 @@
+organisation: M+P
+title: Case 7 - stiff soil
+test-description: >
+  Young modulus of top layer divided by a factor 2, stiff soil input file
+date: 2025-07-25
+json-file: json_output_case_7_stiff.json
+input-file: case_7_stiff.py
+mdpa-file: json_output_case_7_stiff.mdpa
+STEM-version: 1.2.3

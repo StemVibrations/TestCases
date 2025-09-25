@@ -1,5 +1,5 @@
 organisation: Deltares
-title: Test case 14 stiff soil
+title: Case 14 - stiff soil
 test-description: >
   Test case 14
   Effect of ballast stiffness, Young's modulus increased by factor 2
