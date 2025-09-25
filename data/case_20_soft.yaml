@@ -1,5 +1,5 @@
 organisation : We-Boost
-title        :  Test case 20 soft soil, changing soil coordinates
+title        : Case 20 - soft soil
 test-description: >
   Decreased depths of peat and clay layers so that the sand soil layer is much closer to the surface.
 date         : 2025-08-25

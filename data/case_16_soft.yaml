@@ -1,5 +1,5 @@
 organisation : Level Acoustics & Vibration
-title        :  Test case 16 soft soil, damping soil stiffness
+title        : Case 16 - soft soil
 test-description: >
   The stiffness part of the Rayleigh damping of the soil (a soft soil),
   project_parameters.settings.rayleigh_k,
