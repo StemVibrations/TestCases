@@ -2,6 +2,7 @@
 input_files_dir = "soft_files_dir"
 results_dir = "output"
 
+
 from stem.model import Model
 from stem.soil_material import OnePhaseSoil, LinearElasticSoil, SoilMaterial, SaturatedBelowPhreaticLevelLaw
 from stem.structural_material import ElasticSpringDamper, NodalConcentrated
