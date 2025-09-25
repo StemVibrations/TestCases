@@ -1,5 +1,5 @@
 organisation: Cohere Consultants
-title: Test 3
+title: Test 3 stiff
 test-description: >
   This is the file for test 3 stiff soil, changed the mass of the sleepers with a factor 2. The actual STEM version is 1.2.3a0 but
   this is not supported by the validator, therefore the version here is changed
