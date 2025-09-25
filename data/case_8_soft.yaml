@@ -1,0 +1,13 @@
+organisation : Level Acoustics & Vibration
+title        : Case 8 - soft soil
+test-description: >
+  The track irregularity parameter Av (scale factor of the variance)
+  irr_parameters.Av,
+  is decreased from 2.1E-5 to 2.1E-6
+
+  Speed: this ran in about 65 hours (10 cores, i9, actual speed 4,5GHz)
+date         : 2025-07-12
+json-file    : json_output_case_8_soft.json
+input-file   : case_8_soft.py
+mdpa-file    : mdpa_output_case_8_soft.mdpa
+STEM-version : 1.2.3

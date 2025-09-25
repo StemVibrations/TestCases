@@ -1,0 +1,13 @@
+organisation : Level Acoustics & Vibration
+title        : Case 16 - stiff soil
+test-description: >
+  The stiffness part of the Rayleigh damping of the soil (a stiff soil),
+  project_parameters.settings.rayleigh_k,
+  is increased from 0.786E-4 to 1.04E-4
+
+  Speed: this ran in about 11 hours (20 cores, i9, actual speed 3,3GHz)
+date         : 2025-07-09
+json-file    : json_output_case_16_stiff.json
+input-file   : case_16_stiff.py
+mdpa-file    : mdpa_output_case_16_stiff.mdpa
+STEM-version : 1.2.3

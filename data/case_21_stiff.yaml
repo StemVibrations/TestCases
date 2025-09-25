@@ -1,0 +1,18 @@
+organisation : Level Acoustics & Vibration
+title        : Case 21 - stiff soil
+test-description: >
+  Cases 1 and 19 combined.
+  The second moment of inertia of the rail Izz,
+  rail_parameters.I33
+  is doubled, that way doubling the vertical bending stiffness B = EI.
+
+  The unsprung mass,
+  uvec_parameters("wheel_mass")
+  is doubled from 1500 to 3000 kg.
+
+  Speed: this ran in about 11 hours (24 cores, i9, actual speed 3,3GHz)
+date         : 2025-07-10
+json-file    : json_output_case_21_stiff.json
+input-file   : case_21_stiff.py
+mdpa-file    : mdpa_output_case_21_stiff.mdpa
+STEM-version : 1.2.3

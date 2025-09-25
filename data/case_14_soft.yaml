@@ -1,0 +1,10 @@
+organisation: Deltares
+title: Case 14 - soft soil
+test-description: >
+  Test case 14
+  Effect of ballast stiffness, Young's modulus increased by factor 2
+date: 2025-07-14
+json-file: case_14_results_soft.json
+input-file: case_14_soft_soil.py
+mdpa-file: case_14_soft_stage_2.mdpa
+STEM-version: 1.2.3

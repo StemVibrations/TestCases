@@ -1,0 +1,10 @@
+organisation: Ricardo Nederland B.V
+title: Case 6 - soft soil
+test-description: >
+  The primary damping of the bogey (var:"wheel_stiffness") is
+  increased by a factor of 2. The simulation is run on the soft-soil domain.
+date: 2025-08-11
+json-file: SoftSoil_case006_Stage2.json
+input-file: SoftSoil_case006_Stage2.py
+mdpa-file: SoftSoil_case006_Stage2.mdpa
+STEM-version: 1.2.3

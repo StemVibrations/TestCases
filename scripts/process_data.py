@@ -122,9 +122,9 @@ def edit_content_summary(summary: dict):
     for key in sorted(summary.keys()):
         new_content.append(f"| {summary[key]['meta']['title']} | "
                            f"{round(summary[key]['peak_velocity_y'], 3)} | "
-                           f"{round(summary[key]["peak_v_eff"], 3)} | "
-                           f"{round(summary[key]["peak_psd"], 4)} | "
-                           f"{round(summary[key]["freq_peak_psd"], 3)} |\n")
+                           f"{round(summary[key]['peak_v_eff'], 3)} | "
+                           f"{round(summary[key]['peak_psd'], 4)} | "
+                           f"{round(summary[key]['freq_peak_psd'], 3)} |\n")
 
     # Replace the content between markers
     before_marker = content[:start_index]

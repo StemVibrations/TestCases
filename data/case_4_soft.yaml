@@ -1,0 +1,11 @@
+---
+organisation: Deltares
+title: Case 4 - soft soil
+test-description: >
+  Changed the coordinates of the embankment point: (3.5, 2.2,
+  0.0) -> (5.0, 2.2, 0.0)
+date: 2025-08-19
+json-file: case_4_results_soft.json
+input-file: case_4_soft.py
+mdpa-file: mdpa_output_case_4_soft.mdpa
+STEM-version: 1.2.3

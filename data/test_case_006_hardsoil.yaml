@@ -1,0 +1,10 @@
+---
+organisation: Ricardo Nederland BV
+title: Case 6 - stiff soil
+test-description: |
+  Hard soil model with primary damping increased by factor of 2.
+date: 2025-08-27
+json-file: test_case_006_hardsoil.json
+input-file: test_case_006_hardsoil.py
+mdpa-file: test_case_006_hardsoil.mdpa
+STEM-version: 1.2.3
