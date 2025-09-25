@@ -1,6 +1,6 @@
 ---
 organisation: Deltares
-title: Test 4 - Geometry of the embankment
+title: Case 4 - soft soil
 test-description: >
   Changed the coordinates of the embankment point: (3.5, 2.2,
   0.0) -> (5.0, 2.2, 0.0)
