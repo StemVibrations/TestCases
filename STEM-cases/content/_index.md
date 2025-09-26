@@ -1,6 +1,6 @@
 ---
 title: "Homepage"
-type: "home"
+layout: "single"
 ---
 
 ## STEM test cases

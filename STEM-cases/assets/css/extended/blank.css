@@ -1,0 +1,32 @@
+/* Override background colors to ensure consistency */
+
+[data-theme="light"] {
+    --theme: #fff;
+    --entry: #fff;
+    --primary: rgba(0, 0, 0, 0.88);
+    --secondary: rgba(0, 0, 0, 0.56);
+    --tertiary: rgba(0, 0, 0, 0.16);
+    --content: rgba(0, 0, 0, 0.88);
+    --hljs-bg: #fafafa;
+    --code-bg: #f5f5f5;
+    --border: #eee;
+}
+
+/* Ensure consistent background for both home and other pages */
+body {
+    background: var(--theme);
+}
+
+.main {
+    background: var(--theme);
+}
+
+.post {
+    background: var(--entry);
+}
+
+/* Specifically target list pages (like home) and single pages */
+.list,
+.single {
+    background: var(--theme);
+}
