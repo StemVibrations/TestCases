@@ -7,6 +7,8 @@ type: "home"
 
 This is the webpage for the STEM test cases.
 
+In [cases]({{< ref "cases.md" >}}) you can find the description of the test cases.
+
 In [results]({{< ref "results.md" >}}) you can find the results of the test cases.
 
 In [summary]({{< ref "summary.md" >}}) you can find a summary of the test cases.
