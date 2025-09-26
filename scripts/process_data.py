@@ -82,7 +82,7 @@ def edit_content_results(summary: dict):
 
     # Generate the new content
     new_content = []
-    for key in sorted(summary.keys()):
+    for key in sorted(summary.keys(), key=lambda x: int(x.split(" ")[1])):
         new_content.append(f"## {summary[key]['meta']['title']}\n\n")
         new_content.append(f"**Description:** {summary[key]['meta']['test-description']}\n")
         new_content.append(f"**Organization:** {summary[key]['meta']['organisation']}\n\n")
@@ -119,7 +119,7 @@ def edit_content_summary(summary: dict):
     # Generate the new content
     new_content = ["| Test case | V_y,max | V_eff,max | PSD,max | Freq_PSD,max  |\n"]
     new_content.append("|-----|-----|-----|-----|-----|\n")
-    for key in sorted(summary.keys()):
+    for key in sorted(summary.keys(), key=lambda x: int(x.split(" ")[1])):
         new_content.append(f"| {summary[key]['meta']['title']} | "
                            f"{round(summary[key]['peak_velocity_y'], 3)} | "
                            f"{round(summary[key]['peak_v_eff'], 3)} | "
