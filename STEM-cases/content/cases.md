@@ -5,6 +5,14 @@ url: "/cases"
 
 This is the description of the test cases performed with STEM.
 
+The soft soil case is based on a cross section in Schalkwijk, the stiff case on a cross section in Holten.
+
+![Cross section for the soft and stiff soil case](/TestCases/geom_cases.png)
+*Figure - Cross section for the soft and stiff soil cases*
+
+The following table gives an overview of the test cases that are performed.
+The table indicates whether the test case is performed for the stiff and/or soft case.
+
 
 | Test case | Test description | How to model in STEM | Stiff case | Soft case  |
 |-----|-----|-----|-----|-----|
