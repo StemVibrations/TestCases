@@ -684372,7 +684372,7 @@ Begin SubModelPart abs
 End SubModelPart
 
 
-Begin SubModelPart case_17_stiff_json_output
+Begin SubModelPart json_output
   Begin SubModelPartTables
   End SubModelPartTables
   Begin SubModelPartNodes
