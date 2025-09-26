@@ -1,0 +1,9 @@
+organisation: TNO
+title: Case 15 - soft soil
+test-description: >
+  This is the file for test 15 soft soil
+date: 2025-08-01
+json-file: case_15_json_output_stage_2.json
+input-file: case_15_soft_soil.py
+mdpa-file: case_15_soft_stage_2.mdpa
+STEM-version: 1.2.3
