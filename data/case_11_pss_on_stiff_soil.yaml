@@ -3,7 +3,7 @@ title: Case 11 - stiff soil
 test-description: >
   Test 11, PSS on stiff soil. PSS young modules is assumed to be 10x stiffer than ballast and about 5x stiffer than very stiff sand
 date: 2025-08-26
-json-file: Case_11_pss_on_stiff_soil.json
-input-file: Case_11_pss_on_stiff_soil.py
-mdpa-file: Case_11_pss_on_stiff_soil.mdpa
+json-file: case_11_pss_on_stiff_soil.json
+input-file: case_11_pss_on_stiff_soil.py
+mdpa-file: case_11_pss_on_stiff_soil.mdpa
 STEM-version: 1.2.3

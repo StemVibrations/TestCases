@@ -3,7 +3,7 @@ title: Case 19 - soft soil
 test-description: >
   This is the file for case 19 change wheel mass on soft soil. This is the calculation with the masss of the wheel halved.
 date: 2025-08-31
-json-file: Case_19_pss_on_soft_soil.json
-input-file: Case_19_pss_on_soft_soil.py
-mdpa-file: Case_19_pss_on_soft_soil.mdpa
+json-file: case_19_pss_on_soft_soil.json
+input-file: case_19_pss_on_soft_soil.py
+mdpa-file: case_19_pss_on_soft_soil.mdpa
 STEM-version: 1.2.3
