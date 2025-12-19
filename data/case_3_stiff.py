@@ -346,9 +346,7 @@ model.add_output_settings_by_coordinates(
         (25, surface_level, 45.0),
         (max_x_coordinate, surface_level, 45),
     ],
-    json_output_parameters,
-    "json_output",
-)
+                                         json_output_parameters, "json_output")
 
 # set time integration parameters
 end_time = 0.002
