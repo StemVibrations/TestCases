@@ -378,9 +378,7 @@ solver_settings = SolverSettings(
 )
 
 # Set up problem data
-problem = Problem(
-    problem_name="stiff_soil", number_of_threads=64, settings=solver_settings
-)
+problem = Problem(problem_name="stiff_soil", number_of_threads=64, settings=solver_settings)
 model.project_parameters = problem
 
 
