@@ -1,35 +1,34 @@
-input_files_dir = "stiff_files_dir"
-
-results_dir = "output"
-
-from stem.model import Model
-from stem.soil_material import (
-    OnePhaseSoil,
-    LinearElasticSoil,
-    SoilMaterial,
-    SaturatedBelowPhreaticLevelLaw,
-)
-from stem.structural_material import ElasticSpringDamper, NodalConcentrated
+import UVEC.uvec_ten_dof_vehicle_2D as uvec
+from stem.boundary import AbsorbingBoundary, DisplacementConstraint
 from stem.default_materials import DefaultMaterial
 from stem.load import MovingLoad, UvecLoad
-from stem.boundary import DisplacementConstraint, AbsorbingBoundary
-from stem.solver import (
-    AnalysisType,
-    SolutionType,
-    TimeIntegration,
-    DisplacementConvergenceCriteria,
-    NewtonRaphsonStrategy,
-    StressInitialisationType,
-    SolverSettings,
-    Problem,
-    LinearNewtonRaphsonStrategy,
-    Cg,
-    Amgcl,
+from stem.model import Model
+from stem.output import JsonOutputParameters, NodalOutput, VtkOutputParameters
+from stem.soil_material import (
+    LinearElasticSoil,
+    OnePhaseSoil,
+    SaturatedBelowPhreaticLevelLaw,
+    SoilMaterial,
 )
-from stem.output import NodalOutput, VtkOutputParameters, JsonOutputParameters
+from stem.solver import (
+    Amgcl,
+    AnalysisType,
+    Cg,
+    DisplacementConvergenceCriteria,
+    LinearNewtonRaphsonStrategy,
+    NewtonRaphsonStrategy,
+    Problem,
+    SolutionType,
+    SolverSettings,
+    StressInitialisationType,
+    TimeIntegration,
+)
 from stem.stem import Stem
+from stem.structural_material import ElasticSpringDamper, NodalConcentrated
 
-import UVEC.uvec_ten_dof_vehicle_2D as uvec
+input_files_dir = './data/case_3_stiff/'
+
+results_dir = "output"
 
 ndim = 3
 model = Model(ndim)
@@ -37,7 +36,6 @@ model.extrusion_length = 90
 
 bottom_coordinate = -10.0
 max_x_coordinate = 50.0
-
 
 # Define all parameters for all materials
 soil_formulation_1 = OnePhaseSoil(
@@ -48,13 +46,13 @@ material_ballast = SoilMaterial(
     "ballast", soil_formulation_1, constitutive_law_1, SaturatedBelowPhreaticLevelLaw()
 )
 
-
 # # fill in PPS parameters
 # soil_formulation_pps = OnePhaseSoil(ndim, IS_DRAINED=True, DENSITY_SOLID=None, POROSITY=None)
 # constitutive_law_pps = LinearElasticSoil(YOUNG_MODULUS=None, POISSON_RATIO=None)
 # material_pps = SoilMaterial("pps", soil_formulation_pps, constitutive_law_pps, SaturatedBelowPhreaticLevelLaw())
 
-# set the undrained Poisson ratio to almost 0.5 in order to prevent volumetric strains and simulate undrained behaviour
+# set the undrained Poisson ratio to almost 0.5 in order to prevent
+# volumetric strains and simulate undrained behaviour
 poisson_ratio_undrained = 0.495
 
 soil_formulation_sand = OnePhaseSoil(
@@ -69,7 +67,6 @@ material_sand = SoilMaterial(
     constitutive_law_sand,
     SaturatedBelowPhreaticLevelLaw(),
 )
-
 
 # fill in concrete parameters
 # soil_formulation_concrete = OnePhaseSoil(ndim, IS_DRAINED=True, DENSITY_SOLID=2350, POROSITY=0.0)
@@ -90,7 +87,6 @@ material_styrofoam = SoilMaterial(
     SaturatedBelowPhreaticLevelLaw(),
 )
 
-
 thickness_ballast = 0.4
 surface_level = 0.7
 
@@ -102,7 +98,6 @@ ballast_coordinates = [
     (2.5, surface_level, 0.0),
     (0.0, surface_level, 0.0),
 ]
-
 
 thickness_foundation_top = 0.5
 foundation_coordinates_top = [
@@ -126,14 +121,12 @@ layer_1_boundary_depth = -5.0
 layer_2_boundary_depth = -6.0
 length_deep_wall = 7.7
 
-
 deep_wall_part_coordinates = [
     (x_coord_deep_wall, surface_level, 0.0),
     (x_coord_deep_wall, -length_deep_wall, 0.0),
     (x_coord_deep_wall + thickness_deep_wall, -length_deep_wall, 0.0),
     (x_coord_deep_wall + thickness_deep_wall, surface_level, 0.0),
 ]
-
 
 soil_1_coordinates = (
     [
@@ -158,7 +151,6 @@ soil_1_coordinates = (
     ]
 )
 
-
 model.add_soil_layer_by_coordinates(ballast_coordinates, material_ballast, "ballast")
 
 model.add_soil_layer_by_coordinates(
@@ -172,7 +164,6 @@ model.add_soil_layer_by_coordinates(soil_1_coordinates, material_sand, "soil_lay
 model.add_soil_layer_by_coordinates(
     deep_wall_part_coordinates, material_sand, "deep_wall"
 )
-
 
 # create track with extension outside the 3D soil domain
 rail_parameters = DefaultMaterial.Rail_54E1_3D.value.material_parameters
@@ -200,7 +191,8 @@ sleeper_distance = 0.6
 n_sleepers = 334
 rail_pad_thickness = 0.025
 
-# create a straight track with rails, sleepers, rail pads and a 1D soil extension
+# create a straight track with rails, sleepers, rail pads and a 1D soil
+# extension
 model.generate_extended_straight_track(
     sleeper_distance=sleeper_distance,
     n_sleepers=n_sleepers,
@@ -231,7 +223,8 @@ uvec_parameters = {
     "cart_inertia": (1128.8e3) / 2,  # inertia of the cart [kgm2]
     "cart_mass": (50e3) / 2,  # mass of the cart [kg]
     "cart_stiffness": 2708e3,  # stiffness between the cart and bogies [N/m]
-    "cart_damping": 64e3,  # damping coefficient between the cart and bogies [Ns/m]
+    # damping coefficient between the cart and bogies [Ns/m]
+    "cart_damping": 64e3,
     "bogie_distances": [
         -9.95,
         9.95,
@@ -243,18 +236,23 @@ uvec_parameters = {
         1.25,
     ],  # distances of the wheels from the centre of the bogie [m]
     "wheel_mass": 1.5e3,  # mass of the wheel [kg]
-    "wheel_stiffness": 4800e3,  # stiffness between the wheel and the bogie [N/m]
-    "wheel_damping": 0.25e3,  # damping coefficient between the wheel and the bogie [Ns/m]
+    # stiffness between the wheel and the bogie [N/m]
+    "wheel_stiffness": 4800e3,
+    # damping coefficient between the wheel and the bogie [Ns/m]
+    "wheel_damping": 0.25e3,
     "gravity_axis": 1,  # axis on which gravity works [x =0, y = 1, z = 2]
-    "contact_coefficient": 9.1e-7,  # Hertzian contact coefficient between the wheel and the rail [N/m]
-    "contact_power": 1.0,  # Hertzian contact power between the wheel and the rail [-]
+    # Hertzian contact coefficient between the wheel and the rail [N/m]
+    "contact_coefficient": 9.1e-7,
+    # Hertzian contact power between the wheel and the rail [-]
+    "contact_power": 1.0,
     "static_initialisation": True,  # True if the analysis of the UVEC is static
-    "wheel_configuration": wheel_configuration,  # initial position of the wheels [m]
+    # initial position of the wheels [m]
+    "wheel_configuration": wheel_configuration,
     "velocity": 0.0,  # velocity of the UVEC [m/s]
     "irr_parameters": {"Av": 2.095e-05, "seed": 14},
 }
 uvec_load = UvecLoad(
-    direction=[1, 1, 1],
+    direction_signs=[1, 1, 1],
     velocity=0.0,
     origin=[0.7, top_ballast + rail_pad_thickness, -43],
     wheel_configuration=wheel_configuration,
@@ -266,7 +264,6 @@ uvec_load = UvecLoad(
 # add the load on the track
 model.add_load_on_line_model_part("rail_track_1", uvec_load, "uvec_load")
 
-
 # define the boundary conditions
 roller_displacement_parameters = DisplacementConstraint(
     active=[True, False, True], is_fixed=[True, False, True], value=[0, 0, 0]
@@ -277,7 +274,6 @@ absorbing_boundaries_parameters_bottom = AbsorbingBoundary(
 absorbing_boundaries_parameters = AbsorbingBoundary(
     absorbing_factors=[1.0, 1.0], virtual_thickness=0.1
 )
-
 
 # add the boundary conditions to the model
 model.add_boundary_condition_on_plane(
@@ -308,7 +304,6 @@ model.add_boundary_condition_on_plane(
     "abs",
 )
 
-
 # aux code to calculate the required element size and time step for proper integration
 # import numpy as np
 # E = 200e6
@@ -331,9 +326,7 @@ model.set_element_size_of_group(0.75, "foundation_bot")
 
 model.set_element_size_of_group(0.75, "deep_wall")
 
-
 model.set_mesh_size(element_size=1.3)
-
 
 # define at which points the json output should be written
 delta_time = 0.0005
@@ -346,7 +339,9 @@ model.add_output_settings_by_coordinates(
         (25, surface_level, 45.0),
         (max_x_coordinate, surface_level, 45),
     ],
-                                         json_output_parameters, "json_output")
+    json_output_parameters,
+    "case_3_results_stiff"
+)
 
 # set time integration parameters
 end_time = 0.002
@@ -378,9 +373,8 @@ solver_settings = SolverSettings(
 )
 
 # Set up problem data
-problem = Problem(problem_name="stiff", number_of_threads=8, settings=solver_settings)
+problem = Problem(problem_name="stiff",number_of_threads=16, settings=solver_settings)
 model.project_parameters = problem
-
 
 # define the output settings in vtk format
 model.add_output_settings(
@@ -389,7 +383,7 @@ model.add_output_settings(
     output_name="vtk_output",
     output_parameters=VtkOutputParameters(
         file_format="binary",
-        output_interval=15,
+                output_interval=1000,
         nodal_results=[
             NodalOutput.DISPLACEMENT,
             NodalOutput.VELOCITY,
@@ -420,18 +414,19 @@ stage2.project_parameters.settings.rayleigh_k = 7.86e-5
 stage2.project_parameters.settings.rayleigh_m = 0.248
 
 # change the uvec parameters for the second stage
-velocity = (
-    38.9 - 1e-5
-)  # 140 km/h minus a small value to prevent numerical issues (solved in upcoming version)
+# 140 km/h minus a small value to prevent numerical issues (solved in
+# upcoming version)
+velocity = 38.9 - 1e-5
 stage2.get_model_part_by_name("uvec_load").parameters.velocity = velocity
-stage2.get_model_part_by_name("uvec_load").parameters.uvec_parameters["velocity"] = (
-    velocity
-)
+stage2.get_model_part_by_name("uvec_load").parameters.uvec_parameters[
+    "velocity"
+] = velocity
 stage2.get_model_part_by_name("uvec_load").parameters.uvec_parameters[
     "static_initialisation"
 ] = False
 
-# increase the virtual thickness of the side absorbing boundary conditions for proper damping
+# increase the virtual thickness of the side absorbing boundary conditions
+# for proper damping
 stage2.get_model_part_by_name("abs").parameters.virtual_thickness = 50
 
 # add the new stage to the stem calculation
