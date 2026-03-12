@@ -379,7 +379,7 @@ uvec_parameters = {
     "velocity": 0.0,  # velocity of the UVEC [m/s]
     "irr_parameters": {"Av": 2.095e-05, "seed": 14},
 }
-# uvec_load = UvecLoad(direction=[1,1,1], velocity = 0.0, origin=[0.7, 2.6 + rail_pad_thickness, -43],
+# uvec_load = UvecLoad(direction_signs=[1,1,1], velocity = 0.0, origin=[0.7, 2.6 + rail_pad_thickness, -43],
 # wheel_configuration=wheel_configuration, uvec_model= uvec,
 # uvec_parameters=uvec_parameters)
 
@@ -389,7 +389,7 @@ for i, d in enumerate(wheel_configuration):
         "rail_track_1",
         MovingLoad(
             load=[0, -9250, 0],
-            direction=[1, 1, 1],
+            direction_signs=[1, 1, 1],
             velocity=0.0,
             origin=[0.7, 2.6 + rail_pad_thickness, -45 + d],
         ),
@@ -478,7 +478,7 @@ model.add_output_settings_by_coordinates(
         (max_x_coordinate, surface_level, 45),
     ],
     json_output_parameters,
-    "json_output",
+    "json_output_case_18_soft",
 )
 
 # set time integration parameters
@@ -521,7 +521,7 @@ model.add_output_settings(
     output_name="vtk_output",
     output_parameters=VtkOutputParameters(
         file_format="binary",
-        output_interval=15,
+        output_interval=1000,
         nodal_results=[
             NodalOutput.DISPLACEMENT,
             NodalOutput.VELOCITY,
