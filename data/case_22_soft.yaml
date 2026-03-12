@@ -1,0 +1,12 @@
+organisation : Deltares
+title        : Case 22 - soft soil
+test-description: >
+  The track irregularity parameter Av (scale factor of the variance)
+  irr_parameters.Av,
+  is increased from 2.1E-5 to 2.1E-4
+
+date         : 2025-07-12
+json-file    : json_output_case_22_soft.json
+input-file   : case_22_soft.py
+mdpa-file    : mdpa_output_case_22_soft.mdpa
+STEM-version : 1.2.3
