@@ -5,7 +5,7 @@ test-description: >
   irr_parameters.Av,
   is increased from 2.1E-5 to 2.1E-4
 
-date         : 2025-07-12
+date         : 2026-03-12
 json-file    : json_output_case_22_soft.json
 input-file   : case_22_soft.py
 mdpa-file    : mdpa_output_case_22_soft.mdpa
