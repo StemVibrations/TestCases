@@ -469,6 +469,7 @@ model.set_element_size_of_group(0.75, "deep_wall_part_3")
 model.set_element_size_of_group(0.5, "ditch")
 
 model.set_mesh_size(element_size=1)
+model.mesh_settings.element_order = 2
 
 # define at which points the json output should be written
 delta_time = 0.0005
