@@ -26,7 +26,7 @@ from stem.solver import (
 from stem.stem import Stem
 from stem.structural_material import ElasticSpringDamper, NodalConcentrated
 
-input_files_dir = './data/case_20_soft/'
+input_files_dir = "./data/case_20_soft/"
 results_dir = "output"
 
 ndim = 3
@@ -473,7 +473,7 @@ model.add_output_settings_by_coordinates(
         (max_x_coordinate, surface_level, 45),
     ],
     json_output_parameters,
-    "json_output_case_20_soft"
+    "json_output_case_20_soft",
 )
 
 # set time integration parameters
@@ -506,7 +506,7 @@ solver_settings = SolverSettings(
 )
 
 # Set up problem data
-problem = Problem(problem_name="soft",number_of_threads=16, settings=solver_settings)
+problem = Problem(problem_name="soft", number_of_threads=16, settings=solver_settings)
 model.project_parameters = problem
 
 # define the output settings in vtk format
@@ -516,7 +516,7 @@ model.add_output_settings(
     output_name="vtk_output",
     output_parameters=VtkOutputParameters(
         file_format="binary",
-                output_interval=1000,
+        output_interval=1000,
         nodal_results=[
             NodalOutput.DISPLACEMENT,
             NodalOutput.VELOCITY,

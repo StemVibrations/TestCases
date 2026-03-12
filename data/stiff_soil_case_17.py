@@ -26,7 +26,7 @@ from stem.solver import (
 from stem.stem import Stem
 from stem.structural_material import ElasticSpringDamper, NodalConcentrated
 
-input_files_dir = './data/stiff_soil_case_17/'
+input_files_dir = "./data/stiff_soil_case_17/"
 
 results_dir = "output"
 
@@ -218,7 +218,8 @@ uvec_parameters = {
     # stiffness between the cart and bogies [N/m]
     "cart_stiffness": 5416e3,
     # "cart_stiffness": 2708e3, # stiffness between the cart and bogies [N/m]
-    "cart_damping": 64e3,  # damping coefficient between the cart and bogies [Ns/m]
+    # damping coefficient between the cart and bogies [Ns/m]
+    "cart_damping": 64e3,
     "bogie_distances": [
         -9.95,
         9.95,
@@ -230,15 +231,19 @@ uvec_parameters = {
         1.25,
     ],  # distances of the wheels from the centre of the bogie [m]
     "wheel_mass": 1.5e3,  # mass of the wheel [kg]
-    "wheel_stiffness": 4800e3,  # stiffness between the wheel and the bogie [N/m]
-    "wheel_damping": 0.25e3,  # damping coefficient between the wheel and the bogie [Ns/m]
+    # stiffness between the wheel and the bogie [N/m]
+    "wheel_stiffness": 4800e3,
+    # damping coefficient between the wheel and the bogie [Ns/m]
+    "wheel_damping": 0.25e3,
     "gravity_axis": 1,  # axis on which gravity works [x =0, y = 1, z = 2]
     "contact_coefficient":
     # Hertzian contact coefficient between the wheel and the rail [N/m]
     9.1e-7,
-    "contact_power": 1.0,  # Hertzian contact power between the wheel and the rail [-]
+    # Hertzian contact power between the wheel and the rail [-]
+    "contact_power": 1.0,
     "static_initialisation": True,  # True if the analysis of the UVEC is static
-    "wheel_configuration": wheel_configuration,  # initial position of the wheels [m]
+    # initial position of the wheels [m]
+    "wheel_configuration": wheel_configuration,
     "velocity": 0.0,  # velocity of the UVEC [m/s]
     "irr_parameters": {"Av": 2.095e-05, "seed": 14},
 }
@@ -331,7 +336,7 @@ model.add_output_settings_by_coordinates(
         (max_x_coordinate, surface_level, 45),
     ],
     json_output_parameters,
-    "case_17_stiff_json_output"
+    "case_17_stiff_json_output",
 )
 
 # set time integration parameters
@@ -364,7 +369,7 @@ solver_settings = SolverSettings(
 )
 
 # Set up problem data
-problem = Problem(problem_name="stiff",number_of_threads=16, settings=solver_settings)
+problem = Problem(problem_name="stiff", number_of_threads=16, settings=solver_settings)
 model.project_parameters = problem
 
 # define the output settings in vtk format
@@ -374,7 +379,7 @@ model.add_output_settings(
     output_name="vtk_output",
     output_parameters=VtkOutputParameters(
         file_format="binary",
-                output_interval=1000,
+        output_interval=1000,
         nodal_results=[
             NodalOutput.DISPLACEMENT,
             NodalOutput.VELOCITY,
