@@ -164,11 +164,9 @@ uvec_parameters = {"n_carts": 2, # number of carts [-]
                    }
 #uvec_load = UvecLoad(direction=[1,1,1], velocity = 0.0, origin=[0.7, top_ballast + rail_pad_thickness, -43],
    # wheel_configuration=wheel_configuration, uvec_model= uvec, uvec_parameters=uvec_parameters)
-uvec_load = MovingLoad(load=[0,-155000,0],direction=[1,1,1], velocity = 0.0, origin=[0.7, top_ballast + rail_pad_thickness, -45])
-
 # add the load on the track
-model.add_load_on_line_model_part("rail_track_1", uvec_load, "uvec_load")
-
+for i, d in enumerate(wheel_configuration):
+    model.add_load_on_line_model_part("rail_track_1", MovingLoad(load=[0,-9250,0],direction=[1,1,1], velocity = 0.0, origin=[0.7, 2.6 + rail_pad_thickness, -45 + d]), f"uvec_load{i+1}")
 
 # define the boundary conditions
 roller_displacement_parameters = DisplacementConstraint(active=[True, False, True],
@@ -283,7 +281,8 @@ stage2.project_parameters.settings.rayleigh_m = 0.248
 
 # change the uvec parameters for the second stage
 velocity = 38.9 - 1e-5 # 100 km/h minus a small value to prevent numerical issues (solved in upcoming version)
-stage2.get_model_part_by_name("uvec_load").parameters.velocity = velocity
+for i, d in enumerate(wheel_configuration):
+    stage2.get_model_part_by_name(f"uvec_load{i+1}").parameters.velocity = velocity
 # stage2.get_model_part_by_name("uvec_load").parameters.uvec_parameters["velocity"] = velocity
 # stage2.get_model_part_by_name("uvec_load").parameters.uvec_parameters["static_initialisation"] = False
 
