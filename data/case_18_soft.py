@@ -398,7 +398,7 @@ for i, d in enumerate(wheel_configuration):
 
 # define the boundary conditions
 roller_displacement_parameters = DisplacementConstraint(
-    active=[True, False, True], is_fixed=[True, False, True], value=[0, 0, 0]
+    is_fixed=[True, False, True], value=[0, 0, 0]
 )
 absorbing_boundaries_parameters_bottom = AbsorbingBoundary(
     absorbing_factors=[1.0, 1.0], virtual_thickness=10.0
