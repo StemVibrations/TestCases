@@ -6,4 +6,4 @@ date: 2025-07-09
 json-file: stiff_soil_case_1.json
 input-file: stiff_soil_case_1.py
 mdpa-file: stiff_soil_case_1.mdpa
-STEM-version: 1.2.4.a
+STEM-version: 1.3.0

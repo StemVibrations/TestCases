@@ -1,0 +1,12 @@
+organisation : Deltares
+title        : Case 22 - stiff soil
+test-description: >
+  The track irregularity parameter Av (scale factor of the variance)
+  irr_parameters.Av,
+  is increased from 2.1E-5 to 2.1E-4
+
+date         : 2026-03-12
+json-file    : json_output_case_22_stiff.json
+input-file   : case_22_stiff.py
+mdpa-file    : mdpa_output_case_22_stiff.mdpa
+STEM-version : 1.3.0

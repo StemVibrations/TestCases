@@ -12,6 +12,42 @@ from validators import json_validator, yaml_validator, mdpa_validator
 COORD_REF = [25, 0.7, 45]
 TOL = 1e-6
 
+def process_input_files(yaml_file):
+    """
+    Processes the input files by validating and loading their content.
+
+    Parameters:
+        yaml_file (str): Path to the YAML file.
+
+    Returns:
+        tuple: A tuple containing the loaded data, metadata, and MDPA content.
+    """
+
+    # validate YAML file
+    if not yaml_validator(yaml_file):
+        print(f"Validation failed for YAML file: {yaml_file}")
+        raise ValueError(f"Invalid YAML file: {yaml_file}")
+
+    with open(yaml_file, 'r') as f:
+        meta = yaml.safe_load(f)
+
+    # validate JSON files
+    if not json_validator(os.path.join("data", meta["json-file"]), meta["STEM-version"]):
+        print(f"Validation failed for JSON file: {meta['json-file']}")
+        raise ValueError(f"Invalid JSON file: {meta['json-file']}")
+
+    with open(os.path.join("data", meta["json-file"]), "r") as f:
+        data = json.load(f)
+
+    # validate mdpa file
+    if not mdpa_validator(os.path.join("data", meta["mdpa-file"])):
+        print(f"Validation failed for MDPA file: {meta['mdpa-file']}")
+        raise ValueError(f"Invalid MDPA file: {meta['mdpa-file']}")
+
+    with open(os.path.join("data", meta["mdpa-file"]), "r") as f:
+        mdpa_content = f.read().splitlines()
+
+    return data, meta, mdpa_content
 
 def main(folder_path: str):
     """
@@ -31,33 +67,24 @@ def main(folder_path: str):
 
     summary = {}
 
+    # process data for reference case: Case 0
+    data_ref_soft, _, _ = process_input_files(os.path.join("data", "soft_base_case_0.yaml"))
+    data_ref_stiff, _, _ = process_input_files(os.path.join("data", "stiff_base_case_0.yaml"))
+
+    # process all yamls
     for yaml_file in yaml_files:
-        # validate YAML file
-        if not yaml_validator(yaml_file):
-            print(f"Validation failed for YAML file: {yaml_file}")
-            raise ValueError(f"Invalid YAML file: {yaml_file}")
+        data, meta, mdpa_content = process_input_files(yaml_file)
 
-        with open(yaml_file, 'r') as f:
-            meta = yaml.safe_load(f)
-
-        # validate JSON files
-        if not json_validator(os.path.join("data", meta["json-file"]), meta["STEM-version"]):
-            print(f"Validation failed for JSON file: {meta['json-file']}")
-            raise ValueError(f"Invalid JSON file: {meta['json-file']}")
-
-        with open(os.path.join("data", meta["json-file"]), "r") as f:
-            data = json.load(f)
-
-        # validate mdpa file
-        if not mdpa_validator(os.path.join("data", meta["mdpa-file"])):
-            print(f"Validation failed for MDPA file: {meta['mdpa-file']}")
-            raise ValueError(f"Invalid MDPA file: {meta['mdpa-file']}")
-
-        with open(os.path.join("data", meta["mdpa-file"]), "r") as f:
-            mdpa_content = f.read().splitlines()
-
+        # determine ref case
+        if "soft" in meta["title"].lower():
+            data_ref = data_ref_soft
+        elif "stiff" in meta["title"].lower():
+            data_ref = data_ref_stiff
+        else:
+            raise ValueError(f"Could not determine reference case for {meta['title']}")
+    
         # Plotting the data
-        summary[";".join([meta["title"], meta["organisation"]])] = process_plot_data(data, meta, mdpa_content)
+        summary[";".join([meta["title"], meta["organisation"]])] = process_plot_data(data, meta, mdpa_content, data_ref)
 
     # edit the hugo content files
     edit_content_results(summary)
@@ -137,7 +164,7 @@ def edit_content_summary(summary: dict):
 
 
 
-def process_plot_data(data: dict, meta: dict, mdpa: dict) -> dict:
+def process_plot_data(data: dict, meta: dict, mdpa: dict, reference_data: dict) -> dict:
     """
     Processes and creates a plot from the data and metadata.
 
@@ -145,6 +172,7 @@ def process_plot_data(data: dict, meta: dict, mdpa: dict) -> dict:
         data (dict): The data dictionary containing the JSON results.
         meta (dict): The metadata dictionary.
         mdpa (dict): The MDPA content as a list of strings.
+        reference_data (dict): The data dictionary containing the JSON results for the reference case.
 
     Returns:
         dict: A summary dictionary containing peak values, frequencies, and plot location.
@@ -187,27 +215,40 @@ def process_plot_data(data: dict, meta: dict, mdpa: dict) -> dict:
     signal.psd()
     signal.v_eff_SBR()
 
-    fig, ax = plt.subplots(ncols=3, nrows=1, figsize=(15, 4))
+    signal_ref = time_signal.TimeSignalProcessing(reference_data["TIME"],
+                                                  np.array(reference_data[node]["VELOCITY_Y"]),
+                                                  window=Windows.HAMMING,
+                                                  window_size=2000)
+    signal_ref.psd()
+
+    fig, ax = plt.subplots(ncols=4, nrows=1, figsize=(20, 4))
     ax[0].plot(data["TIME"], np.array(data[node]["VELOCITY_Y"])*1000, label=r"v$_{y}$", color="blue")
-    ax[1].plot(data["TIME"], signal.v_eff[:len(data["TIME"])], label=r"v$_{eff}$", color="orange")
-    ax[2].plot(signal.frequency_Pxx, signal.Pxx*1000**2, label=r"v$_{y}$", color="blue")
+    ax[1].plot(data["TIME"], signal.v_eff[:len(data["TIME"])], label=r"v$_{eff}$", color="blue")
+    ax[2].plot(signal.frequency_Pxx, signal.Pxx*1000, label=r"v$_{y}$", color="blue")
+    insertion_loss = 10 * np.log(signal.Pxx / signal_ref.Pxx)
+    ax[3].plot(signal.frequency_Pxx, insertion_loss, label=r"v$_{y}$", color="blue")
     ax[0].set_xlabel("Time (s)")
     ax[0].set_ylabel("Velocity Y (mm/s)")
     ax[1].set_xlabel("Time (s)")
     ax[1].set_ylabel("V$_eff$ (mm/s)")
     ax[2].set_xlabel("Frequency (Hz)")
     ax[2].set_ylabel("PSD ([mm/s]$^2$/Hz)")
+    ax[3].set_xlabel("Frequency (Hz)")
+    ax[3].set_ylabel("Insertion loss: case / case 0 (dB/Hz)")
     ax[0].set_xlim(left=0)
     ax[1].set_xlim(left=0)
     ax[2].set_xlim(0, 100)
+    ax[3].set_xlim(0, 100)
     ax[1].set_ylim(bottom=0)
     ax[2].set_ylim(bottom=0)
     ax[0].grid()
     ax[1].grid()
     ax[2].grid()
+    ax[3].grid()
     ax[0].legend()
     ax[1].legend()
     ax[2].legend()
+    ax[3].legend()
     plt.tight_layout()
     plt.savefig(os.path.join(output_folder, f"{name}.png"))
     plt.close()

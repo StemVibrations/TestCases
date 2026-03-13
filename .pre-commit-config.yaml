@@ -1,0 +1,42 @@
+repos:
+  # fix import order and move imports to top of file (E402)
+  - repo: https://github.com/pycqa/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+        name: isort
+        files: "^data/"
+        args:
+          - --profile=black
+
+  # fix line length, spacing, and other PEP8 issues (E501)
+  - repo: https://github.com/pre-commit/mirrors-autopep8
+    rev: v2.0.4
+    hooks:
+      - id: autopep8
+        name: autopep8
+        files: "^data/"
+        args:
+          - --in-place
+          - --aggressive
+          - --aggressive
+          - --max-line-length=79
+
+  # format code according to Google style guide
+  - repo: https://github.com/google/yapf
+    rev: v0.43.0
+    hooks:
+      - id: yapf
+        name: yapf
+        files: "^data/"
+        language: python
+        entry: yapf
+        args: [-i]
+        types: [python]
+
+  # black code formatter: because of the signature of function calls
+  - repo: https://github.com/psf/black
+    rev: 24.10.0
+    hooks:
+      - id: black
+        files: "^data/"

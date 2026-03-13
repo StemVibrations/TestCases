@@ -5,10 +5,9 @@ def test_json_validator():
     """
     Test with a valid JSON file
     """
-    assert json_validator("tests/data/json_output_80.json", "1.2.3")
-    assert json_validator("tests/data/json_output_120.json", "1.2.3")
-
-    assert json_validator("tests/data/json_output_80_alpha.json", "1.2.4.a")
+    assert json_validator("tests/data/json_output_80.json", "1.3.0")
+    assert json_validator("tests/data/json_output_120.json", "1.3.0")
+    assert json_validator("tests/data/json_output_80_alpha.json", "1.4.0a")
 
 
 def test_json_validator_wrong_version(capsys):

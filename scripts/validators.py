@@ -73,7 +73,7 @@ def json_validator(json_path: str, stem_version: str) -> bool:
         return False
 
     # Load the schema based on the STEM version
-    if (stem_version == "1.2.3") or (stem_version == "1.2.4.a"):
+    if (stem_version == "1.3.0") or (stem_version == "1.4.0a"):
         conf_schema = __definitions()
     else:
         print(f"Unsupported STEM version: {stem_version}")

@@ -6,4 +6,4 @@ date         : 2025-08-25
 json-file    : json_output_case_20_soft.json
 input-file   : case_20_soft.py
 mdpa-file    : mdpa_output_case_20_soft.mdpa
-STEM-version : 1.2.4.a
+STEM-version : 1.3.0

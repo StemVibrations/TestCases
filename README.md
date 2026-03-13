@@ -5,8 +5,8 @@ This repository contains test cases for railway induced vibrations modelled with
 ## Instructions
 
 In order to run the test cases, you need to have STEM installed.
-You can find the installation instructions in the [STEM documentation](https://stemvibrations.readthedocs.io/v1.2/#stem-installation).
-In the test cases, the STEM version 1.2.3 is used.
+You can find the installation instructions in the [STEM documentation](https://stemvibrations.readthedocs.io/v1.3/installation.html).
+In the test cases, the STEM version 1.3.0 is used.
 
 For the test cases you also need to have [git](https://git-scm.com/) installed, in order to commit the results.
 
@@ -38,7 +38,7 @@ date: 2025-06-23
 json-file: json_output_test_case_number.json
 input-file: input_file_test_case_number.py
 mdpa-file: input_file_test_case_number.mdpa
-STEM-version: 1.2.3
+STEM-version: 1.3.0
 ```
 
 The `organisation` and `title` are self-explanatory.
@@ -48,7 +48,7 @@ The `json-file` field should contain the name of the JSON file with the results 
 The `input-file` field should contain the name of the input file used to run the test case.
 The `mdpa-file` field should contain the name of the MDPA file used to run the test case.
 This is a file that contains the model definition in Kratos Multiphysics format.
-The `STEM-version` field should contain the version of STEM. In principle this should be 1.2.3.
+The `STEM-version` field should contain the version of STEM. In principle this should be 1.3.0.
 
 Please note, that STEM produces two `.json` and two `.mdpa` results files. This is because the  calculation is run in two stages:
 
