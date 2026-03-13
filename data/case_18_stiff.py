@@ -250,10 +250,10 @@ for i, d in enumerate(wheel_configuration):
     model.add_load_on_line_model_part(
         "rail_track_1",
         MovingLoad(
-            load=[0, -9250, 0],
+            load=[0, -9250e3, 0],
             direction_signs=[1, 1, 1],
             velocity=0.0,
-            origin=[0.7, 2.6 + rail_pad_thickness, -45 + d],
+            origin=[0.7, top_ballast + rail_pad_thickness, -43 + d],
         ),
         f"uvec_load{i+1}",
     )
