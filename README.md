@@ -38,7 +38,7 @@ date: 2025-06-23
 json-file: json_output_test_case_number.json
 input-file: input_file_test_case_number.py
 mdpa-file: input_file_test_case_number.mdpa
-STEM-version: 1.2.3
+STEM-version: 1.3.0
 ```
 
 The `organisation` and `title` are self-explanatory.

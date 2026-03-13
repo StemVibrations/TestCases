@@ -7,4 +7,4 @@ date: 2026-01-05
 json-file: case_18_soft_json_output_stage_2.json
 input-file: case_18_soft.py
 mdpa-file: case_18_soft_stage_2.mdpa
-STEM-version: 1.2.3
+STEM-version: 1.3.0

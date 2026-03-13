@@ -6,4 +6,4 @@ date: 2025-08-29
 json-file: case_13_soft_soil.json
 input-file: case_13_soft_soil_ditch_with_clay.py
 mdpa-file: case_13_soft_soil.mdpa
-STEM-version: 1.2.3
+STEM-version: 1.3.0

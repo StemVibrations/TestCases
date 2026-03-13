@@ -6,4 +6,4 @@ date: 2025-08-26
 json-file: case_11_pss_on_soft_soil.json
 input-file: case_11_pss_on_soft_soil.py
 mdpa-file: case_11_pss_on_soft_soil.mdpa
-STEM-version: 1.2.3
+STEM-version: 1.3.0
