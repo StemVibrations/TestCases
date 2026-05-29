@@ -1,0 +1,10 @@
+organisation: Deltares 
+title: stem td - soft_frz
+test-description: >
+  Part of stem td cases
+  soft case, increase E of top layer by 20%
+date: 2026-04-23
+json-file: stem_td_soft_soil_frz_stage_2.json
+input-file: stem_td_soft_soil_frz.py
+mdpa-file: stem_td_soft_soil_frz_stage_2.mdpa
+STEM-version: 1.3.0
