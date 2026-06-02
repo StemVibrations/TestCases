@@ -1,0 +1,8 @@
+organisation: Deltares 
+title: Case 24 - Stiff soil
+test-description: >
+  stiff case, increase cart stiffness by 20%
+date: 2026-19-05
+json-file: case_24_stiff_stage_2.json
+input-file: case_24_stiff_soil_secstiff_high.py
+STEM-version: 1.3.0

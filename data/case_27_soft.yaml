@@ -1,0 +1,8 @@
+organisation: Deltares 
+title: Case 27 - Soft soil
+test-description: >
+  soft case, increase E of top layer by 20%
+date: 2026-04-23
+json-file: case_27_soft_stage_2.json
+input-file: case_27_soft_soil_frz.py
+STEM-version: 1.3.0

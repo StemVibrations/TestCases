@@ -1,0 +1,8 @@
+organisation: Deltares 
+title: Case 23 - Stiff soil
+test-description: >
+  stiff case, change Av to line grade 2
+date: 2026-05-05
+json-file: case_23_stiff_stage_2.json
+input-file: case_23_stiff_soil_irr_2.py
+STEM-version: 1.3.0
