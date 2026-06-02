@@ -1,0 +1,8 @@
+organisation: Deltares 
+title: Case 27 - Stiff soil
+test-description: >
+  stiff case, increase E of top layer by 20%
+date: 2026-04-23
+json-file: case_27_stiff_stage_2.json
+input-file: case_27_stiff_soil_frz.py
+STEM-version: 1.3.0

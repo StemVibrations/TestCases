@@ -1,0 +1,8 @@
+organisation: Deltares 
+title: Case 26 - Stiff soil
+test-description: >
+  soft case, low water table (dry)
+date: 2026-20-05
+json-file: case_26_stiff_stage_2.json
+input-file: case_26_stiff_soil_dry.py
+STEM-version: 1.3.0
